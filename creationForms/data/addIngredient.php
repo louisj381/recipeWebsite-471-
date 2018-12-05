@@ -6,16 +6,18 @@
     $ingrName = text_input($_POST["ingrName"]);
     $calPgram = $_POST["calPgram"];
   }
-
-  //begin sql
-  $sql = "INSERT INTO `Project_Database`.`INGREDIENT`(`Name`,`Cal/g`)VALUES('$ingrName','$calPgram');";
-  $success = $_SESSION['connection']->query($sql);
-  if ($success === TRUE) {
-    alert("Successful Submission.");
+  if (strlen($calPgram) === 0 || strlen($ingrName) === 0) {
+    alert("Please enter values.");
   } else {
-    alert("Unsuccessful Submission.");
+    //begin sql
+    $sql = "INSERT INTO `Project_Database`.`INGREDIENT`(`Name`,`Cal/g`)VALUES('$ingrName','$calPgram');";
+    $success = $_SESSION['connection']->query($sql);
+    if ($success === TRUE) {
+      alert("Successful Submission.");
+    } else {
+      alert("Unsuccessful Submission.");
+    }
   }
-
   function text_input($data) {
     $data = mb_strtolower($data);
     $data = trim($data);
