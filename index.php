@@ -19,16 +19,12 @@
         $sql = "SELECT User_Id FROM END_USER WHERE Screen_Name = '$myusername' AND Hashed_Password = SHA2('$mypassword',256);";
         $result = mysqli_query($db,$sql);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        $active = $row['active'];
-
         $count = mysqli_num_rows($result);
 
         // If result matched $myusername and $mypassword, table row must be 1 row
 
         if($count == 1) {
-          // session_register("myusername");
-           $_SESSION['user_id'] = $result;
-
+           $_SESSION['user_id'] = $row['User_Id'];
            header("location: views/homepage.php");
         }else {
            $error = "Your Login Name or Password is invalid";
