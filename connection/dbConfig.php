@@ -8,7 +8,7 @@
   $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
   $_SESSION['connection'] = $db;
   // Check connection
-  if (mysqli_connect_errno($con))
+  if (mysqli_connect_errno($db))
   {
    echo "Failed to connect to our MySQL Server: " . mysqli_connect_error();
   }
