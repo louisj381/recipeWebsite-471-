@@ -1,0 +1,19 @@
+
+table#fancyTable {
+  style="width:100%"
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+@media screen and (max-width: 875px) {
+    .column {
+        width: 100%;
+    }
+}

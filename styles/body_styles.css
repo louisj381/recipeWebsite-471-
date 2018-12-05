@@ -1,0 +1,38 @@
+
+body {
+        background-color: white;
+        /*background-image:url('../photos/0Q4A2361.png');*/
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        color:#F0F8FF;
+        font-family:avenir;
+        font-size: 12;
+
+}
+h1 {
+        color: black;/*#F0F8FF;*/
+        font-family:avenir;
+        font-size: 24;
+}
+p {
+        color:#F0F8FF;
+        font-family:avenir;
+        font-size: 12;
+        font-variant: italic;
+        font-weight: lighter;
+}
+.column {
+    float: left;
+    width: 50%;
+}
+
+#reg {
+    font-family: avenir;
+}
+#fancyCode {
+    margin-left:5em;
+    margin-right:5em;
+    background:rgba(211, 211, 211, 0.55);
+    color:black;
+}
