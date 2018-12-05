@@ -18,4 +18,4 @@ session_start();
     <input type="submit" name="createCurAccount" value="Create Curator">
   </form>
 </body>
-</html?
+</html?>
