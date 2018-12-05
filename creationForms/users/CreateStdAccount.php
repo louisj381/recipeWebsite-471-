@@ -1,11 +1,12 @@
 <?php
 ob_start();
 session_start();
+define(root, "../../");
  ?>
 
 <html>
 <body>
-  <form action="homepage.php" method="post">
+  <form action='../../views/homepage.php' method="post">
 
   Username: <input type="text" name="Username" value="<?php echo $name;?>"><br><br>
   Password: <input type="password" name="Password" value="<?php echo $name;?>"><br>
