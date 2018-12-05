@@ -2,22 +2,20 @@
   // define variables and set to empty values
   $ingrName = $calPgram = "";
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ingrName']) && !empty($_POST['calPgram'])) {
     $ingrName = text_input($_POST["ingrName"]);
     $calPgram = $_POST["calPgram"];
   }
-  if (strlen($calPgram) === 0 || strlen($ingrName) === 0) {
-    alert("Please enter values.");
+  //begin sql
+  $sql = "INSERT INTO `Project_Database`.`INGREDIENT`(`Name`,`Cal/g`)VALUES('$ingrName','$calPgram');";
+  $success = $_SESSION['connection']->query($sql);
+
+  if ($success === TRUE) {
+    alert("Successful Submission.");
   } else {
-    //begin sql
-    $sql = "INSERT INTO `Project_Database`.`INGREDIENT`(`Name`,`Cal/g`)VALUES('$ingrName','$calPgram');";
-    $success = $_SESSION['connection']->query($sql);
-    if ($success === TRUE) {
-      alert("Successful Submission.");
-    } else {
-      alert("Unsuccessful Submission.");
-    }
+    alert("Unsuccessful Submission.");
   }
+
   function text_input($data) {
     $data = mb_strtolower($data);
     $data = trim($data);
