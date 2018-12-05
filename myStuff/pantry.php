@@ -1,7 +1,7 @@
 <?php
-ob_start();
-session_start();
+  ob_start();
+  session_start();
  ?>
 <?php
-echo "in pantry";
+  echo "in pantry";
 ?>

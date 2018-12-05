@@ -1,7 +1,6 @@
 <?php
-ob_start();
-session_start();
- ?>
-<?php
-echo "createCurAccount";
+  ob_start();
+  session_start();
+
+  echo "createCurAccount";
 ?>
