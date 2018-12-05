@@ -44,4 +44,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="submit" name="createCurAccount" value="Create Curator">
   </form>
 </body>
-</html?
+</html?>
