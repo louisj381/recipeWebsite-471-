@@ -1,0 +1,7 @@
+appserv/*
+cgi-bin/*
+extraAppserv.php
+phpMyAdmin/*
+**.DS_Store
+**/.DS_Store
+**/**/.DS_Store
