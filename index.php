@@ -1,6 +1,7 @@
 <?php
   ob_start();
   session_start();
+  unset($_SESSION['user_id']);
   define(root, "./");
   include("connection/dbConfig.php");
   //echo $_SESSION['connection'];
@@ -31,13 +32,14 @@
            header("location: views/homepage.php");
         }else {
            $error = "Your Login Name or Password is invalid";
+           echo "<script type='text/javascript'>alert('$error');</script>";
         }
       }
  ?>
 
 <html>
   <body>
-    <form action="" method="post">
+    <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
       Username:
         <input type="text" name="username"
         value="happy_dude123">
