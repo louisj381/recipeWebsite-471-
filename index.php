@@ -32,35 +32,31 @@
         }
       }
  ?>
-
 <html>
 <head>
   <title> Cake. </title>
-  <!--
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    -->
   <link rel="stylesheet" href="./styles/body_styles.css">
 </head>
-  <body>
-    <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
-      Username:
-        <input type="text" name="username"
-        value="happy_dude123">
-      <br>
-      <br>
-      Password:
-        <input type="password" name="password"
-        value="password123">
-      <br>
-      <input type="submit" name="login" value="login">
-    </form>
+<body>
+  <!-- <div class="column4" ><p>&nbsp;</p></div> -->
+  <div class="center" style="width:80%;">
+    <p>&nbsp;</p>
+      <form action="" method="post" id="loginForm" style="width:100%;">
+        <table style="width:100%;">
+          <tr><td>Username:</td><td>
+          <input type="text" name="username" value="happy_dude123" class="column" style="width:75%;float:right;"></td></tr>
+          <tr><td>Password:</td><td>
+          <input type="password" name="password" value="password123" class="column" style="width:75%;float:right;"></td></tr>
+        </table>
+      </form>
+      <form action="creationForms/users/CreateStdAccount.php" method="post" id="stdUser"></form>
+      <form action="creationForms/users/CreateCurAccount.php" method="post" id="curUser"></form>
 
-    <form action="creationForms/users/CreateStdAccount.php" method="post">
-      <input type="submit" name="createStdAccount" value="Create Standard User">
-    </form>
-
-    <form action="creationForms/users/CreateCurAccount.php" method="post">
-      <input type="submit" name="createCurAccount" value="Create Curator">
-    </form>
-  </body>
+      <button class="button" style="width:100%;" type="submit" name="login" form="loginForm">Login</button>
+      <button class="button" style="width:100%;" type="submit" name="createStdAccount" form="stdUser">Create Standard User</button>
+      <button class="button" style="width:100%;" type="submit" name="createCurAccount" form="stdUser">Create Curator</button>
+  </div>
+  <!-- <div class="column4"><p>&nbsp;</p></div> -->
+</body>
 </html>

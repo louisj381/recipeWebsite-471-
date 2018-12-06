@@ -102,40 +102,36 @@
     echo "<p> &nbsp; </p>";
   }
 ?>
-<body>
-  <table>
-    <form action="<?php $save = true;
-                        echo htmlspecialchars($_SERVER["PHP_SELF"]);
-                  ?>" method="post">
-    <tr><td>Username: </td><td><?=$screen_name?></td></tr>
-    <tr><td>Email: </td><td><?=$email?></td></tr>
+<body class="center" style="width:80%;">
+  <table style="width:100%">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="updateForm">
+    <tr><td>Username: </td><td style="text-align:right;"><?=$screen_name?></td></tr>
+    <tr><td>Email: </td><td style="text-align:right;"><?=$email?></td></tr>
 <!--Change FullName-->
   <?
     if ($showSTD) {
       echo '
-          <tr><td>First Name:</td><td><input type="text" name="new_f_name" value="' . $f_name . '"></td></tr>
-          <tr><td>Last Name: </td><td><input type="text" name="new_l_name" value="' . $l_name . '"></td></tr>
-          <tr><td>Allergies: </td><td>' . $num_allergies . '</td></tr>
+          <tr><td>First Name:</td><td><input type="text" name="new_f_name" value="' . $f_name . '" style="width:100%;"></td></tr>
+          <tr><td>Last Name: </td><td><input type="text" name="new_l_name" value="' . $l_name . '" style="width:100%;"></td></tr>
+          <tr><td>Allergies: </td><td style="text-align:right;">' . $num_allergies . '</td></tr>
       ';
     }
     if ($showCUR) {
       echo '
-          <tr><td>Credit Card: <input type="text" name="new_cc" value="' . $credit . '"></td></tr>
-          <tr><td>Expiry Date: <input type="date" name="new_exp" value="' . $expDay . '"></td></tr>
-          <tr><td>Securiy Num: <input type="date" name="new_sec"></td></tr>
+          <tr><td>Credit Card: <input type="text" name="new_cc" value="' . $credit . '" style="width:100%;"></td></tr>
+          <tr><td>Expiry Date: <input type="date" name="new_exp" value="' . $expDay . '" style="width:100%;"></td></tr>
+          <tr><td>Securiy Num: <input type="date" name="new_sec" style="width:100%;"></td></tr>
       ';
     }
    ?>
 <!--Change Password-->
-      <tr><td>New Password: </td><td><input type="text" name="new_pass"></td></tr>
-      <tr><td><input type="submit" name="Save Changes" value="Save Changes"></td>
+      <tr><td>New Password: </td><td><input type="text" name="new_pass" style="width:100%;"></td></tr>
+      <tr><td><button class="button" style="width:100%;" form="updateForm">Save Changes.</button></td>
       <input type="hidden" name="changes" value="TRUE">
     </form>
-    <form action="../views/homepage.php" method="post">
-      <td><input type="submit" name="back" value="Go Back"></td></tr>
-    </form>
+      <td><button class="button" style="width:100%;" onClick="location.href = '../views/homepage.php'">Go Back</button></td></tr>
   </table>
-
+ <p>&nbsp;</p>
 </body>
 
 
