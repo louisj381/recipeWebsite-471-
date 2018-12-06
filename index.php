@@ -11,8 +11,8 @@
         // username and password sent from form
         //$myusername = mysqli_real_escape_string($_SESSION['connection'],$_POST['username']);
         //$mypassword = mysqli_real_escape_string($_SESSION['connection'],$_POST['password']);
-        $myusername = $_POST['username'];
-        $mypassword = $_POST['password'];
+        $myusername = htmlspecialchars($_POST['username']);
+        $mypassword = htmlspecialchars($_POST['password']);
 
         //  ... ,SHA2('password',256), ...
         $sql = "SELECT User_Id FROM END_USER WHERE Screen_Name = '$myusername' AND Hashed_Password = SHA2('$mypassword',256);";
