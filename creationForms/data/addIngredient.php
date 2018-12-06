@@ -1,6 +1,7 @@
 <?php
 ob_start();
 session_start();
+include("connection/dbConfig.php");
   // define variables and set to empty values
   $ingrName = $calPgram = "";
 
@@ -10,7 +11,8 @@ session_start();
   }
   //begin sql
   $sql = "INSERT INTO `Project_Database`.`INGREDIENT`(`Name`,`Cal/g`)VALUES('$ingrName','$calPgram');";
-  $success = $_SESSION['connection']->query($sql);
+  //$success = $_SESSION['connection']->query($sql);
+  $success = $db->query($sql);
 
   if ($success === TRUE) {
     alert("Successful Submission.");

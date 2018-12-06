@@ -36,6 +36,10 @@ p {
     background:rgba(211, 211, 211, 0.55);
     color:black;
 }
+#errorMessage {
+  font-family: monospace;
+  color:red;
+}
 /*
 
 body {
