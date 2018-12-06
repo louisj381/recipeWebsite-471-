@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="../styles/body_styles.css">
   </head>
   <h2> In Pantry: </h2>
+  <!-- THIS IS THE INGREDIENTS FRAME -->
 <div class="column">
-  <iframe src="../tables/ingredients.php"></iframe>
+  <body><iframe src="../tables/ingredients.php"></iframe></body>
 </div>
+  <!--          THIS IS NOT          -->
 <div class="column">
  <body>
 

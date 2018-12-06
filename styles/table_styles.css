@@ -1,11 +1,20 @@
 
-table#fancyTable {
+table {
   style="width:100%"
+  /*border: 1px solid black;*/
+}
+td, th {
+  width: auto;
+  style="width:100%"
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #F0F8FF;
+  /*border-bottom-radius: 3px;*/
 }
 
 .column {
     float: left;
-    width: 50%;
+    width: auto;
 }
 .row:after {
     content: "";
