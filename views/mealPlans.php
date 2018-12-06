@@ -17,7 +17,7 @@
 
     <!-- <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="addMealPlan"></form>
     <button class="button" style="width:100%;" form="addMealPlan">Add</button> -->
-    <button class="button" style="width:100%;" onClick="location.href = '../creationForms/addMealPlan.php'">Add Meal Plan</button>
+    <button class="button" style="width:100%;" onClick="location.href = '../creationForms/data/addMealPlan.php'">Add Meal Plan</button>
     <button class="button" style="width:100%;" onClick="location.href = '../views/homepage.php'">Go Back</button>
   </body>
 </div>
