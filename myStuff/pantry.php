@@ -19,7 +19,9 @@
 <div class="column">
  <body>
 
-
+    <form action="../creationForms/data/addIngredient.php" method="post">
+      <input type="submit" name="AddIngred" value="Add">
+    </form>
      <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
        <input type="submit" name="Refresh" value="Refresh">
      </form>
