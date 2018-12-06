@@ -5,3 +5,13 @@
 <?php
   echo "in account";
 ?>
+
+<!--    My Info    -->
+
+
+
+<!--Change FullName-->
+
+
+
+<!--Change Password-->
