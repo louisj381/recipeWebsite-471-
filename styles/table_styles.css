@@ -1,7 +1,11 @@
 
 table {
   style="width:100%"
+<<<<<<< HEAD
   /*border: 1px solid black;*/
+=======
+  border: 1px solid black;
+>>>>>>> Louis
 }
 td, th {
   width: auto;
