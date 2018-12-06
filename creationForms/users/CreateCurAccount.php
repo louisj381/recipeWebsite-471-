@@ -5,6 +5,7 @@ define(root, "../../");
 include ("../../connection/dbConfig.php");
 
 if( isset($_POST['btnsubmit'] )) {
+
  $cc = $_POST['cc'];
  $ex = $_POST['ex'];
  $sec = $_POST['sec'];
