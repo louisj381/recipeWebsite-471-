@@ -11,8 +11,8 @@
   <body>
     <table id=fancyTable>
       <tr>
-        <th>Your</th>
         <th>Dependants</th>
+        <th>Your</th>
         <th>Allergy Count</th>
       </tr>
       <?php
@@ -30,9 +30,9 @@
             $allergies = $row['No-of_allergies']; //check this
             echo "
             <tr>
-             <td>$name</td>
-             <td>$relationship</td>
-             <td>$allergies</td>
+             <td style=\"width:50%;\">$name</td>
+             <td style=\"width:30%;\">$relationship</td>
+             <td style=\"width:20%;\">$allergies</td>
             </tr>";
           }
         } else {

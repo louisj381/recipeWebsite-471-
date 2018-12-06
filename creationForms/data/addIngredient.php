@@ -58,34 +58,19 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddIngredient']))
     -->
   <link rel="stylesheet" href="../../styles/body_styles.css">
 </head>
-<h2>
-  Add Ingredient:
-</h2>
-
-  <body>
-    <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
-
-      Ingredient Name:
-        <input type="text" name="ingrName">
-      <br>
-      <br>
-      calories per gram:
-        <input type="number" name="calPgram">
-      <br>
-      <br>
-      Quantity:
-        <input type="number" name="quantity">
-      <br>
-      <br>
-      Unit:
-        <input type="text" name="unit">
-      <br>
-      <br>
-        <input type="submit" name="AddIngredient" value="Add">
-    </form>
-    <form action="../../myStuff/pantry.php" method="post">
-      <input type="submit" name="Back" value="Back">
-    </form>
-
-  </body>
+<h2>Add Ingredient:</h2>
+<body>
+  <table style="width:100%">
+  <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="info">
+    <tr><td>Ingredient Name:</td><td><input type="text" name="ingrName" style="width:100%"></td></tr>
+    <tr><td>Calories per Gram:</td><td><input type="number" name="calPgram" style="width:100%"></td></tr>
+    <tr><td>Quantity:</td><td><input type="number" name="quantity" style="width:100%"></td></tr>
+    <tr><td>Unit:</td><td><input type="text" name="unit" style="width:100%"></td></tr>
+  </form>
+  <form action="../../myStuff/pantry.php" method="post" id="back"></form>
+  <tr>
+    <td><button class="button" style="width:100%" type="submit" name="AddIngredient" value="Add" form="info">Add</button></td>
+    <td><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
+  </tr>
+</body>
 </html>

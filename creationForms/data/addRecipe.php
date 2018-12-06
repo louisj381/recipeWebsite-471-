@@ -1,5 +1,5 @@
-<!--so far just copy of add ingredient-->
 <?php
+//TODO this whole thing
 ob_start();
 session_start();
   // define variables and set to empty values
@@ -10,13 +10,14 @@ session_start();
     $calPgram = $_POST["calPgram"];
   }
   //begin sql
+  include("../../connection/dbConfig.php");
   $sql = "INSERT INTO `Project_Database`.`INGREDIENT`(`Name`,`Cal/g`)VALUES('$ingrName','$calPgram');";
-  $success = $_SESSION['connection']->query($sql);
+  $success = $db->query($sql);
 
   if ($success === TRUE) {
-    alert("Successful Submission.");
+    echo "<script type='text/javascript'>alert(\"Successful Submission.\");</script>";
   } else {
-    alert("Unsuccessful Submission.");
+    echo "<script type='text/javascript'>alert(\"Unsuccessful Submission.\");</script>";
   }
 
   function text_input($data) {

@@ -10,24 +10,18 @@
       -->
     <link rel="stylesheet" href="../styles/body_styles.css">
   </head>
+
+<div class="center" style="width:80%;">
   <h2> Guestbook: </h2>
-<div class="column">
-  <iframe src="../tables/dependants.php"></iframe>
-</div>
-<div class="column">
- <body>
+  <body>
+    <iframe src="../tables/dependants.php" style="width:100%;"></iframe>
+    <form action="../creationForms/data/addDependant.php" method="post" id="addDep"></form>
+    <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="refresh"></form>
+    <form action="../views/homepage.php" method="post" id="back"></form>
 
-    <form action="../creationForms/data/addDependant.php" method="post">
-      <input type="submit" name="Add" value="Add">
-    </form>
-
-     <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
-       <input type="submit" name="Refresh" value="Refresh">
-     </form>
-     <form action="../views/homepage.php" method="post">
-       <input type="submit" name="back" value="Back to My Stuff">
-     </form>
-
+    <button class="button" style="width:100%;" type="submit" name="Add" value="Add"form="addDep">Add</button>
+    <button class="button" style="width:100%;" type="submit" name="Refresh" value="Refresh" form="refresh">Refresh</button>
+    <button class="button" style="width:100%;" type="submit" name="back" value="Back to My Stuff" form="back">Back to My Stuff</button>
  </body>
 </div>
 </html>

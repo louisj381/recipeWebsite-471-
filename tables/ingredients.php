@@ -29,9 +29,9 @@
             $unit = $row['unit'];
             echo "
             <tr>
-             <td style=\"text-align:left;\">$ingredient</td>
-             <td style=\"text-align:center;\">$number</td>
-             <td>$unit</td>
+             <td style=\"text-align:left;width:80%;\">$ingredient</td>
+             <td style=\"text-align:center;width:7%;\">$number</td>
+             <td style=\"width:13%;\">$unit</td>
             </tr>";
           }
         } else {
