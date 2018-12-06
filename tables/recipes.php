@@ -22,7 +22,8 @@
         $root = "../";
         include($root . "connection/dbConfig.php");  //to access db
         $uID = $_SESSION['user_id'];
-        $sqlText = "SELECT * FROM RECIPE;";
+        $sqlText = $_SESSION['sqlBrowseRecipe'];
+        //echo $_PATH['sqlRecipe'] . "<-";
         $res = $db->query($sqlText);
         if ( $res->num_rows > 0 ) {
           while ( $row = $res->fetch_assoc() ) {
