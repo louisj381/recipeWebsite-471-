@@ -43,7 +43,7 @@
             </tr>";
           }
         } else {
-          echo "<tr><td>None</td><td></td></tr>";
+          echo "<tr><td>None</td><td></td><td></td><td></td></tr>";
         }
       ?>
     </table>
