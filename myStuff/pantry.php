@@ -20,6 +20,6 @@
     <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="refresh"></form>
     <button class="button" style="width:100%;" form="refresh">Refresh</button>
     <button class="button" style="width:100%;" onClick="location.href = '../views/homepage.php'">Go Back</button>
- </body>
+  </body>
 </div>
 </html>
