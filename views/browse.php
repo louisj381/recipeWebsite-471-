@@ -13,6 +13,9 @@ $_SESSION['sqlBrowseRecipe'] = $sqlrecipe;
 $sqlmeal = "SELECT * FROM Project_Database.MEAL WHERE Meal_Id IN (SELECT Meal_Id FROM Project_Database.MEAL_TAGS WHERE Tags LIKE '%". $browse ."%');" ;
 //echo '<input type="hidden" name="sqlRecipe" value="' . $sqlrecipe . '">';
 $_SESSION['sqlBrowseMeal'] = $sqlmeal;
+$sqlmealPlan = "SELECT * FROM Project_Database.MEAL_PLAN WHERE Name LIKE '%". $browse ."%';" ;
+//echo '<input type="hidden" name="sqlRecipe" value="' . $sqlrecipe . '">';
+$_SESSION['sqlMealPlan'] = $sqlmealPlan;
 }
 ?>
 
@@ -25,29 +28,32 @@ $_SESSION['sqlBrowseMeal'] = $sqlmeal;
       -->
     <link rel="stylesheet" href="../styles/body_styles.css">
   </head>
-  <h2> Browse: </h2>
   <!-- THIS IS THE BROWSE FRAME -->
-<div class="column">
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-  Tag: <input type="text" name="browse">
-  <input type = "submit" name = "btnbrowse" value = "Search"><br><br>
-  <input type="hidden" name="search" value="TRUE">'
-  </form>
-  <body><iframe src="../tables/recipes.php" ></iframe><br><br>
-        <iframe src="../tables/meals.php" ></iframe></body>
-  </div>
-  <!--          THIS IS NOT          -->
-<div class="column">
- <body>
-
+  <div class="center" style="width:80%;">
+    <h2> Browse: </h2>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-    <input type="submit" name="Refresh" value="Refresh">
+      <table style="width:100%;">
+        <tr>
+          <td style="width:10%;">Search:</td>
+          <td style="width:85%;"><input type="text" name="browse" style="width:100%;"></td>
+          <td style="width:5%;"><button class="button" type = "submit" name = "btnbrowse" value = "Search">Go!</button></td>
+        </tr>
+      </table>
+      <input type="hidden" name="search" value="TRUE">
     </form>
-
-    <form action="../views/homepage.php" method="post">
-    <input type="submit" name="back" value="Back to My Stuff">
-    </form>
-
+    <body>
+      <h3> Recipes: </h3>
+      <iframe src="../tables/recipes.php" style="width:100%;height:30%;"></iframe><br><br>
+      <h3> Meals: </h3>
+      <iframe src="../tables/meals.php" style="width:100%;height:30%;"></iframe></body>
+    <form action="../views/homepage.php" method="post" id="back"></form>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="refresh"></form>
+    <table style="width:100%;">
+      <tr>
+        <td><button class="button" style="width:100%;" type="submit" name="Refresh" value="Refresh" form="refresh">Refresh</button></td>
+        <td><button class="button" style="width:100%;" type="submit" name="back" value="Back to My Stuff" form="back">Back</button></td>
+      </tr>
+    </table>
  </body>
 </div>
 </html>

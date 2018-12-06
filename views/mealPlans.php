@@ -1,6 +1,10 @@
 <?php
   ob_start();
   session_start();
+
+  $sqlmealPlan = "SELECT * FROM Project_Database.MEAL_PLAN WHERE MealPlan_Id IN (SELECT MealPlan_Id FROM Project_Database.USER_MEAL_PLANS as mp  WHERE mp.User_Id = '$uID')";
+  //echo '<input type="hidden" name="sqlRecipe" value="' . $sqlrecipe . '">';
+  $_SESSION['sqlMealPlan'] = $sqlmealPlan;
  ?>
 <html>
   <head>
