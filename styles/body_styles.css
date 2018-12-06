@@ -1,4 +1,10 @@
+@@font-face {
+  font-family: main;
+  src:
+    avenir,
+    "Arial Black";
 
+}
 body {
         background-color: #33334D; /* dark */
         /*background-image:url('../photos/0Q4A2361.png');*/
