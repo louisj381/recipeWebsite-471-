@@ -27,8 +27,8 @@
             $number = $row['count'];
             echo "
             <tr>
-             <td>$ingredient</td>
-             <td>$number</td>
+             <td style=\"text-align:left;\">$ingredient</td>
+             <td style=\"text-align:center;\">$number</td>
             </tr>";
           }
         } else {

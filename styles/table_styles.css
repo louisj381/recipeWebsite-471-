@@ -8,7 +8,7 @@ td, th {
   margin: auto;
   border-bottom-width: 2px;
   border-bottom-style: solid;
-  border-bottom-color: #F0F8FF;
+  border-bottom-color: #F0F8FF; /* light */
   /*border-bottom-radius: 3px;*/
 }
 tr:hover {
