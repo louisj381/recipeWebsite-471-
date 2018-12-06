@@ -40,19 +40,22 @@
 </head>
 <body>
   <!-- <div class="column4" ><p>&nbsp;</p></div> -->
-  <div class="center" style="width:80%;">
-    <p>&nbsp;</p>
+  <!-- <div class="center" style="width:80%;"> -->
+    <div style="width:90%;margin:auto;">
+    <h1 style="font-size:48px;text-align:left;"> Cake. </h1>
+    <hr>
       <form action="" method="post" id="loginForm" style="width:100%;">
         <table style="width:100%;">
           <tr><td>Username:</td><td>
-          <input type="text" name="username" value="happy_dude123" class="column" style="width:75%;float:right;"></td></tr>
+          <input type="text" name="username" value="happy_dude123" class="column" style="width:100%;"></td></tr>
           <tr><td>Password:</td><td>
-          <input type="password" name="password" value="password123" class="column" style="width:75%;float:right;"></td></tr>
+          <input type="password" name="password" value="password123" class="column" style="width:100%;"></td></tr>
         </table>
       </form>
+      <br>
+    <!-- </div> -->
       <form action="creationForms/users/CreateStdAccount.php" method="post" id="stdUser"></form>
       <form action="creationForms/users/CreateCurAccount.php" method="post" id="curUser"></form>
-
       <button class="button" style="width:100%;" type="submit" name="login" form="loginForm">Login</button>
       <button class="button" style="width:100%;" type="submit" name="createStdAccount" form="stdUser">Create Standard User</button>
       <button class="button" style="width:100%;" type="submit" name="createCurAccount" form="curUser">Create Curator</button>
