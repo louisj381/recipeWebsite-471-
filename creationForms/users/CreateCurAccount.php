@@ -4,11 +4,7 @@ session_start();
 define(root, "../../");
 include ("../../connection/dbConfig.php");
 
-//TODO make unique
 if( isset($_POST['btnsubmit'] )) {
- //echo $_POST['username'];
-//  echo $_POST['password'];
-//  echo $_POST['email'];
  $cc = $_POST['cc'];
  $ex = $_POST['ex'];
  $sec = $_POST['sec'];
