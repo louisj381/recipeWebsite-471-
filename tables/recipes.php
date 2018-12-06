@@ -23,9 +23,11 @@
         include($root . "connection/dbConfig.php");  //to access db
         $uID = $_SESSION['user_id'];
         $sqlText = $_SESSION['sqlBrowseRecipe'];
-        //echo $_PATH['sqlRecipe'] . "<-";
+        //echo $_PATH['search'] . "<-";
         $res = $db->query($sqlText);
-        if ( $res->num_rows > 0 ) {
+        if (empty($_SESSION['sqlBrowseRecipe'])) {
+          //do nothing
+        }elseif ( $res->num_rows > 0 ) {
           while ( $row = $res->fetch_assoc() ) {
             $name = $row['Name'];
             $prep = $row['PrepTime'];

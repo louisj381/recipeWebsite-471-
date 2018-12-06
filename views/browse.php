@@ -28,7 +28,7 @@ $_SESSION['sqlBrowseRecipe'] = $sqlrecipe;
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
   Tag: <input type="text" name="browse">
   <input type = "submit" name = "btnbrowse" value = "Search"><br><br>
-  <input type="hidden" name="sqlRecipe" value="<? echo $sqlRecipe ?>">'
+  <input type="hidden" name="search" value="TRUE">'
   </form>
   <body><iframe src="../tables/recipes.php"></iframe></body>
   </div>
