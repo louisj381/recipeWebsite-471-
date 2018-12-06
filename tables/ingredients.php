@@ -29,8 +29,8 @@
             $unit = $row['unit'];
             echo "
             <tr>
-             <td>$ingredient</td>
-             <td>$number</td>
+             <td style=\"text-align:left;\">$ingredient</td>
+             <td style=\"text-align:center;\">$number</td>
              <td>$unit</td>
             </tr>";
           }

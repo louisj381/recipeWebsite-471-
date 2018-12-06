@@ -23,7 +23,12 @@
         include($root . "connection/dbConfig.php");  //to access db
         $uID = $_SESSION['user_id'];
         $sqlText = $_SESSION['sqlBrowseRecipe'];
-        //echo $_PATH['sqlRecipe'] . "<-";
+        //echo $_SESSION['sqlBrowseRecipe'] . "<-";
+
+        if (empty($_SESSION['sqlBrowseRecipe'])) {
+          //leave
+          return;
+        }
         $res = $db->query($sqlText);
         if ( $res->num_rows > 0 ) {
           while ( $row = $res->fetch_assoc() ) {
@@ -35,13 +40,13 @@
             echo "
             <tr>
              <td>$name</td>
-             <td>$prep</td>
-             <td>$rating</td>
+             <td style=\"text-align:center;\">$prep Minutes</td>
+             <td style=\"text-align:center;\">$rating Stars</td>
              <td>$instructions</td>
             </tr>";
           }
         } else {
-          echo "<tr><td>None</td><td></td></tr>";
+          echo "<tr><td>None</td><td></td><td></td><td></td></tr>";
         }
       ?>
     </table>
