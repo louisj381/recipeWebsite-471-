@@ -5,6 +5,7 @@
 
 <html>
   <head>
+    <link rel="stylesheet" href="../styles/body_styles.css">
     <link rel="stylesheet" href="../styles/table_styles.css">
   </head>
   <body>
@@ -12,8 +13,8 @@
       <tr>
         <th>Your</th>
         <th>Dependants</th>
+        <th>Allergy Count</th>
       </tr>
-      //next rows
       <?php
         $root = "../";
         include($root . "connection/dbConfig.php");  //to access db

@@ -111,7 +111,6 @@ if (isset($_POST['alergies']) && !empty($_POST['DepName']) && !empty($_POST['rel
     //$count = mysqli_num_rows($db, $countres);
     $count = mysqli_num_rows($countres);
     //adjust table by altering count
-    //UPDATE `Project_Database`.`DEPENDANTS` SET `No-of_allergies` = '4' WHERE (`User_Id` = '1' AND `Name` = 'John');
 
     $sql = "UPDATE `Project_Database`.`DEPENDANTS` SET `No-of_allergies` = '$count' WHERE (`User_Id` = '$User_Id' AND `Name` = '$Name');";
     $success1 = $db->query($sql);
