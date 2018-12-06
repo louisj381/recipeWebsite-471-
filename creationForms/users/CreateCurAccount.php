@@ -4,7 +4,7 @@ session_start();
 define(root, "../../");
 include ("../../connection/dbConfig.php");
 
-if( $_POST['btnsubmit'] === "TRUE") {
+if( $_POST['btnsubmit'] === "TRUE" ) {
 
  $cc = $_POST['cc'];
  $ex = $_POST['ex'];
@@ -31,12 +31,16 @@ if( $_POST['btnsubmit'] === "TRUE") {
  }
  else{
    $sql = "INSERT INTO Project_Database.END_USER (`Email_Address`, `Screen_Name`, `Hashed_Password`, `Curator_Flag`) VALUES('". $e . "', '". $u . "', SHA2('" . $p ."',256),'1');";
-   mysqli_query($db,$sql);
+   $success1 = mysqli_query($db,$sql);
    $last_id = $db->insert_id;
    $sql = "INSERT INTO Project_Database.CURATOR (`User_Id`,`Credit_Card`, `Exp_Date`, `Sec_Num`) VALUES('". $last_id ."','" . $cc . "', '". $ex ."','". $sec ."');";
-   mysqli_query($db,$sql);
-   $error = "Account created! Go to Login";
-   echo "<script type = 'text/javascript'>alert('$error');</script>";
+   $success2 = mysqli_query($db,$sql);
+   if ($success1 && $success2){
+     $error = "oops! " . $db->error;
+   } else {
+     $error = "Account created!";//Go to Login
+   }
+   echo "<script type = 'text/javascript'>alert('$error');location.href = '../../index.php'</script>";
  }
 }
 ?>
@@ -65,4 +69,4 @@ if( $_POST['btnsubmit'] === "TRUE") {
     </td></tr>
   </table>
 </body>
-</html?>
+</html>
