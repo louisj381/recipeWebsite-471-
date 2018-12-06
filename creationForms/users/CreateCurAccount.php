@@ -4,7 +4,7 @@ session_start();
 define(root, "../../");
 include ("../../connection/dbConfig.php");
 
-if( isset($_POST['btnsubmit'] )) {
+if( $_POST['btnsubmit'] === "TRUE") {
 
  $cc = $_POST['cc'];
  $ex = $_POST['ex'];
@@ -42,18 +42,27 @@ if( isset($_POST['btnsubmit'] )) {
 ?>
 
 <html>
-<head><titel><b>Create Curator Account:</b></title></head>
-<body>
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-  Username: <input type="text" name="username" value="<?php echo $u;?>"><br><br>
-  Password: <input type="password" name="password" value="<?php echo $p;?>"><br><br>
-  Email: <input type="text" name="email" value="<?php echo $email;?>"><br><br>
-  Credit Card Number: <input type="text" name="cc" value="<?php echo $cc;?>"><br><br>
-  Expiration Date: <input type="text" name="ex" value="<?php echo $ex;?>"><br><br>
-  Security Number: <input type="text" name="sec" value="<?php echo $sec;?>"><br><br>
-  <input type="submit" name="btnsubmit" value="submit">
-  </form><form  action="../../index.php" method="post">
-  <input type="submit" name="btnlogin" value="login">
-  </form>
+<head>
+  <title> Cake. </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../styles/body_styles.css">
+</head>
+<h2>Create Curator Account:</h2>
+<body class="center" style="width:80%;">
+  <table style="width:100%;">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="submitCur">
+      <tr><td>Username:           </td><td><input style="width:99%;" type="text" name="username" value="<?php echo $u;?>"></td></tr>
+      <tr><td>Password:           </td><td><input style="width:99%;" type="password" name="password" value="<?php echo $p;?>"></td></tr>
+      <tr><td>Email:              </td><td><input style="width:99%;" type="text" name="email" value="<?php echo $email;?>"></td></tr>
+      <tr><td>Credit Card Number: </td><td><input style="width:99%;" type="text" name="cc" value="<?php echo $cc;?>"></td></tr>
+      <tr><td>Expiration Date:    </td><td><input style="width:99%;" type="text" name="ex" value="<?php echo $ex;?>"></td></tr>
+      <tr><td>Security Number:    </td><td><input style="width:99%;" type="text" name="sec" value="<?php echo $sec;?>"></td></tr>
+    </form>
+    <tr><td>
+      <button class="button" name="btnsubmit" value="TRUE" form="submitCur" style="width:100%;">Submit</button>
+    </td><td>
+      <button class="button" onClick="location.href = '../../index.php'" style="width:100%;">Cancel</button>
+    </td></tr>
+  </table>
 </body>
 </html?>
