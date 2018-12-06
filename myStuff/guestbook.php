@@ -3,12 +3,12 @@
   session_start();
   include("../connection/dbConfig.php");
   $userID = $_SESSION['user_id'];
-  //echo $userID;
+  echo $userID;
 
-  $sql = "SELECT * FROM DEPENDANTS";
+  $sql = "SELECT * FROM DEPENDANTS WHERE User_Id = 'userID'";
   $result = mysqli_query($db,$sql);
 
-  while ($row = mysql_fetch_assoc($result)) {
+  while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
       print_r($row);
       // do stuff with $row
   }
