@@ -12,9 +12,6 @@
     <table>
       <tr>
         <th>Meal</th>
-        <th>Type</th>
-        <th>Recipes</th>
-        <th>Instructions</th>
       </tr>
       <!-- next rows -->
       <?php
@@ -22,23 +19,15 @@
         include($root . "connection/dbConfig.php");  //to access db
         $uID = $_SESSION['user_id'];
         $sqlText = $_SESSION['sqlBrowseMeal'];
-        //echo $_PATH['search'] . "<-";
         $res = $db->query($sqlText);
         if (empty($_SESSION['sqlBrowseMeal'])) {
           //do nothing
         }elseif ( $res->num_rows > 0 ) {
           while ( $row = $res->fetch_assoc() ) {
-            $name = $row['Name'];
-            $prep = $row['PrepTime'];
-            #cooktime
-            $rating = $row['Rating'];
-            $instructions = $row['Instructions'];
+            $name = $row['Meal_type'];
             echo "
             <tr>
              <td>$name</td>
-             <td>$prep</td>
-             <td>$rating</td>
-             <td>$instructions</td>
             </tr>";
           }
         } else {
