@@ -29,16 +29,19 @@ if( isset($_POST['btnsubmit'] )) {
     echo "<script type = 'text/javascript'>alert('$error');</script>";
   }
   else{
-    $sql = "INSERT INTO Project_Database.END_USER (`Email_Address`, `Screen_Name`, `Hashed_Password`, `Curator_Flag`) VALUES('". $e . "', '". $u . "', SHA2('" . $p ."',256),'false');";
+    $sql = "INSERT INTO Project_Database.END_USER (`Email_Address`, `Screen_Name`, `Hashed_Password`, `Curator_Flag`) VALUES('". $e . "', '". $u . "', SHA2('" . $p ."',256),'0');";
     mysqli_query($db,$sql);
     $last_id = $db->insert_id;
     $sql = "INSERT INTO Project_Database.STD_USER (`User_Id`,`First_Name`, `Last_Name`, `Num_Allergies`) VALUES('". $last_id ."','" . $f . "', '". $la ."', 0);";
     mysqli_query($db,$sql);
+    $error = "Account created! Go to Login";
+    echo "<script type = 'text/javascript'>alert('$error');</script>";
   }
 }
  ?>
 
  <html>
+ <head><titel><b>Create Standard Account:</b></title></head>
  <body>
    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
   First  Name: <input type="text" name="fname" value="<?php echo $fname;?>"><br><br>
@@ -46,7 +49,9 @@ if( isset($_POST['btnsubmit'] )) {
    Username: <input type="text" name="username" value="<?php echo $username;?>"><br><br>
    Password: <input type="password" name="password" value="<?php echo $password;?>"><br><br>
     Email: <input type="text" name="email" value="<?php echo $email;?>"><br><br>
-   <input type="submit" name="btnsubmit" value="submit">
+  <input type="submit" name="btnsubmit" value="submit">
+  </form><form  action="../../index.php" method="post">
+  <input type="submit" name="btnlogin" value="login">
  </form>
  </body>
  </html?>
