@@ -12,28 +12,13 @@
   <link rel="stylesheet" href="../styles/body_styles.css">
 </head>
   <body>
-    <form action="../views/browse.php" method="post">
-      <input type="submit" name="browse" value="Browse">
-    </form>
-
-    <form action="../myStuff/cookbook.php" method="post">
-      <input type="submit" name="cookbook" value="Cookbook">
-    </form>
-
-    <form action="../myStuff/pantry.php" method="post">
-      <input type="submit" name="pantry" value="Pantry">
-    </form>
-
-    <form action="../myStuff/guestbook.php" method="post">
-      <input type="submit" name="guestbook" value="Guestbook">
-    </form>
-
-    <form action="../myStuff/account.php" method="post">
-      <input type="submit" name="account" value="Account">
-    </form>
-
-    <form action="../index.php" method="post">
-      <input type="submit" name="logout" value="Logout">
-    </form>
+    <div style="align: center;">
+      <button class="button" style="width:50%;" onClick="location.href = '../views/browse.php'">Browse</button>
+      <button class="button" style="width:50%;" onClick="location.href = '../myStuff/cookbook.php'">Cookbook</button>
+      <button class="button" style="width:50%;" onClick="location.href = '../myStuff/pantry.php'">Pantry</button>
+      <button class="button" style="width:50%;" onClick="location.href = '../myStuff/guestbook.php'">Guestbook</button>
+      <button class="button" style="width:50%;" onClick="location.href = '../myStuff/account.php'">Account</button>
+      <button class="button" style="width:50%;" onClick="location.href = '../index.php'">Logout</button>
+    </div>
   </body>
 </html>
