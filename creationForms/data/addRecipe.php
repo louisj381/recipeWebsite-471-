@@ -29,6 +29,13 @@ session_start();
  ?>
 
 <html>
+<head>
+  <title> Cake. </title>
+  <!--
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    -->
+  <link rel="stylesheet" href="../styles/body_styles.css">
+</head>
 <h2>
   Add Ingredient:
 </h2>

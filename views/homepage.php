@@ -4,6 +4,13 @@
   define(root, "../");
  ?>
 <html>
+<head>
+  <title> Cake. </title>
+  <!--
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    -->
+  <link rel="stylesheet" href="../styles/body_styles.css">
+</head>
   <body>
     <form action="../views/browse.php" method="post">
       <input type="submit" name="browse" value="Browse">
