@@ -1,24 +1,45 @@
 <?php
 ob_start();
 session_start();
-include("connection/dbConfig.php");
+include("../../connection/dbConfig.php");
   // define variables and set to empty values
-  $ingrName = $calPgram = "";
-
-  if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ingrName']) && !empty($_POST['calPgram'])) {
+  $User_Id = $ingrName = $calPgram = $quantity = $unit = "";
+  $User_Id = $_SESSION['user_id'];
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ingrName']) && !empty($_POST['calPgram'])
+    && !empty($_POST['quantity']) && !empty($_POST['unit'])) {
     $ingrName = text_input($_POST["ingrName"]);
     $calPgram = $_POST["calPgram"];
+    $quantity = $_POST["quantity"];
+    $unit = $_POST["unit"];
+    //first check if ingredient already exists in db:
+  $sql = "SELECT * FROM `Project_Database`.`INGREDIENT` WHERE `Name` = '$ingrName';";
+  $validate = $db->query($sql);
+
+  if (mysqli_num_rows($validate) == 0) {  //if no such ingredient exists, add it
+    $sql = "INSERT INTO `Project_Database`.`INGREDIENT`(`Name`,`Cal/g`)VALUES('$ingrName','$calPgram');";
+    $success = $db->query($sql);
+    if ($success === FALSE) {
+      $result = "Unsuccessful adding ingredient";
+      echo "<script type='text/javascript'>alert('$result');</script>";
+    }
   }
-  //begin sql
-  $sql = "INSERT INTO `Project_Database`.`INGREDIENT`(`Name`,`Cal/g`)VALUES('$ingrName','$calPgram');";
-  //$success = $_SESSION['connection']->query($sql);
+
+  $sql = "INSERT INTO `Project_Database`.`USER_INGREDIENTS`(`User_Id`,`Ingredient`,`count`,`unit`)VALUES('$User_Id','$ingrName','$quantity','$unit');";
   $success = $db->query($sql);
 
+
   if ($success === TRUE) {
-    alert("Successful Submission.");
+    $result = "Successful Submission";
   } else {
-    alert("Unsuccessful Submission.");
+    $result = "Unsuccessful adding user_ingredient";
   }
+  echo "<script type='text/javascript'>alert('$result');</script>";
+}//end post
+else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddIngredient'])) {
+  $result = "Missing values!";
+  echo "<script type='text/javascript'>alert('$result');</script>";
+
+}
 
   function text_input($data) {
     $data = mb_strtolower($data);
@@ -45,14 +66,25 @@ include("connection/dbConfig.php");
     <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
 
       Ingredient Name:
-        <input type="text" name="ingrName" value="Butter">
+        <input type="text" name="ingrName">
+      <br>
       <br>
       calories per gram:
-        <input type="number" name="calPgram" value="
-        <?php echo $calPgram;?>">
+        <input type="number" name="calPgram">
       <br>
       <br>
-      <input type="submit" name="browse" value="Browse">
+      Quantity:
+        <input type="number" name="quantity">
+      <br>
+      <br>
+      Unit:
+        <input type="text" name="unit">
+      <br>
+      <br>
+        <input type="submit" name="AddIngredient" value="Add">
+    </form>
+    <form action="../../myStuff/pantry.php" method="post">
+      <input type="submit" name="Back" value="Back">
     </form>
 
   </body>
