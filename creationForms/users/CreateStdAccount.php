@@ -29,15 +29,12 @@ if( isset($_POST['btnsubmit'] )) {
     echo "<script type = 'text/javascript'>alert('$error');</script>";
   }
   else{
-    $sql = "INSERT INTO `END_USER` (`Email_Address`, `Screen_Name`, `Hashed_Password`, `Curator_Flag`) VALUES('". $e . "', '". $u . "', 'SHA2(" . $p .",256)','false');";
+    $sql = "INSERT INTO Project_Database.END_USER (`Email_Address`, `Screen_Name`, `Hashed_Password`, `Curator_Flag`) VALUES('". $e . "', '". $u . "', SHA2('" . $p ."',256),'false');";
     mysqli_query($db,$sql);
     $last_id = $db->insert_id;
-    echo $last_id;
-    $sql = "INSERT INTO `STD_USER` (`User_Id`,`First_Name`, `Last_Name`, 'Num_Allergies') VALUES('". $last_id ."','" . $f . "', '". $la ."', '0');";
-    echo $sql;
+    $sql = "INSERT INTO Project_Database.STD_USER (`User_Id`,`First_Name`, `Last_Name`, `Num_Allergies`) VALUES('". $last_id ."','" . $f . "', '". $la ."', 0);";
     mysqli_query($db,$sql);
   }
-
 }
  ?>
 
