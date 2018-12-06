@@ -88,11 +88,13 @@ body {
 }
 h1 {
         color: black;
+        color: #F0F8FF;/**/
         font-family:avenir;
         font-size: 24;
 }
 p {
         color:black;
+        color:#F0F8FF;/**/
         font-family:avenir;
         font-size: 12;
         font-variant: italic;
@@ -112,6 +114,3 @@ p {
     background:rgba(211, 211, 211, 0.55);
     color:black;
 }
-
-
-*/

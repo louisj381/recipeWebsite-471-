@@ -1,6 +1,7 @@
 <?php
   ob_start();
   session_start();
+  unset($_SESSION['user_id']);
   define(root, "./");
   include("connection/dbConfig.php");
   //echo $_SESSION['connection'];
@@ -27,6 +28,7 @@
            header("location: views/homepage.php");
         }else {
            $error = "Your Login Name or Password is invalid";
+           echo "<script type='text/javascript'>alert('$error');</script>";
         }
       }
  ?>
