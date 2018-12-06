@@ -22,9 +22,21 @@ p {
         font-variant: italic;
         font-weight: lighter;
 }
+.div {
+  margin: 5px 5px;
+  /*padding: 5px 15px;*/
+}
 .column {
     float: left;
     width: 50%;
+}
+.column4 {
+    float: left;
+    width: 25%;
+}
+.center {
+  margin: auto;
+  padding: 10px;
 }
 .button {
   -webkit-transition-duration: 0.4s; /* Safari */
