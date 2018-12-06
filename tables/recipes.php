@@ -23,7 +23,7 @@
         include($root . "connection/dbConfig.php");  //to access db
         $uID = $_SESSION['user_id'];
         $sqlText = $_SESSION['sqlBrowseRecipe'];
-        //echo $_PATH['search'] . "<-";
+        //echo $_SESSION['sqlBrowseRecipe'] . "<-";
 
         if (empty($_SESSION['sqlBrowseRecipe'])) {
           //leave
@@ -40,8 +40,8 @@
             echo "
             <tr>
              <td>$name</td>
-             <td>$prep</td>
-             <td>$rating</td>
+             <td style=\"text-align:center;\">$prep Minutes</td>
+             <td style=\"text-align:center;\">$rating Stars</td>
              <td>$instructions</td>
             </tr>";
           }
