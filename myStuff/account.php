@@ -106,7 +106,7 @@
   <table>
     <form action="<?php $save = true;
                         echo htmlspecialchars($_SERVER["PHP_SELF"]);
-                  ?>" method="post">
+                  ?>" method="post" id="updateForm">
     <tr><td>Username: </td><td><?=$screen_name?></td></tr>
     <tr><td>Email: </td><td><?=$email?></td></tr>
 <!--Change FullName-->
@@ -128,12 +128,10 @@
    ?>
 <!--Change Password-->
       <tr><td>New Password: </td><td><input type="text" name="new_pass"></td></tr>
-      <tr><td><input type="submit" name="Save Changes" value="Save Changes"></td>
+      <tr><td><button class="button" form="updateForm">Save Changes.</button></td>
       <input type="hidden" name="changes" value="TRUE">
     </form>
-    <form action="../views/homepage.php" method="post">
-      <td><input type="submit" name="back" value="Go Back"></td></tr>
-    </form>
+      <td><button class="button" onClick="location.href = '../views/homepage.php'">Go Back</button></td></tr>
   </table>
 
 </body>
