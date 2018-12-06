@@ -2,10 +2,14 @@
 table {
   style="width:100%"
 <<<<<<< HEAD
+<<<<<<< HEAD
   /*border: 1px solid black;*/
 =======
   border: 1px solid black;
 >>>>>>> Louis
+=======
+  /*border: 1px solid black;*/
+>>>>>>> updated css according to keenan
 }
 td, th {
   width: auto;
