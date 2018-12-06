@@ -5,6 +5,7 @@
 <?php
   echo "in account";
 ?>
+
 <html>
 <head>
   <title> Cake. </title>
@@ -14,3 +15,13 @@
   <link rel="stylesheet" href="../styles/body_styles.css">
 </head>
 </html>
+
+<!--    My Info    -->
+
+
+
+<!--Change FullName-->
+
+
+
+<!--Change Password-->
