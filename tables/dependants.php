@@ -10,8 +10,8 @@
   <body>
     <table id=fancyTable>
       <tr>
-        <th>Ingredient</th>
-        <th>Number</th>
+        <th>Your</th>
+        <th>Dependants</th>
       </tr>
       //next rows
       <?php

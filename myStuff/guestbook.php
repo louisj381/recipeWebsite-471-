@@ -17,6 +17,9 @@
 <div class="column">
  <body>
 
+    <form action="../creationForms/data/addDependant.php" method="post">
+      <input type="submit" name="Add" value="Add">
+    </form>
 
      <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
        <input type="submit" name="Refresh" value="Refresh">
