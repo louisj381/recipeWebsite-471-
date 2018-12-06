@@ -2,7 +2,6 @@
 ob_start();
 session_start();
 include("../../connection/dbConfig.php");
-$GLOBALS['allergyCount'] = 0;
   // define variables and set to empty values
   $User_Id = $Name = $Relationship = $No_of_allergies = $Allergy = $Severity = "";
 
@@ -18,7 +17,6 @@ $GLOBALS['allergyCount'] = 0;
       $Allergy = $_POST['Allergy'];
       $Severity = $_POST['Severity'];
       $sql = "INSERT INTO Project_Database.DEPENDANTS(`User_Id`,`Name`,`Relationship`, `No-of_allergies`) VALUES(". $User_Id .",'" . $Name ."','".$Relationship."',1);";
-      echo "$sql";
       $result = mysqli_query($db,$sql);
       $sql = "INSERT INTO Project_Database.ALLERGY(`User_Id`,`Dep_name`,`Allergy`,`Severity`) VALUES(". $User_Id .",'" . $Name ."','".$Allergy."','".$Severity."');";
 
@@ -108,19 +106,15 @@ if (isset($_POST['alergies']) && !empty($_POST['DepName']) && !empty($_POST['rel
   $sql = "INSERT INTO Project_Database.ALLERGY(`User_Id`,`Dep_name`,`Allergy`,`Severity`) VALUES(". $User_Id .",'" . $Name ."','".$Allergy."','".$Severity."');";
   $result = mysqli_query($db,$sql);
   if ($result === TRUE) {
-    $count = $GLOBALS['allergyCount'];
-    $count++;
-    $GLOBALS['allergyCount'] = $count;
+    $sql = "SELECT * FROM `Project_Database`.`ALLERGY` WHERE (`User_Id` = '$User_Id' AND `Dep_name` = '$Name');";
+    $countres = mysqli_query($db,$sql);
+    //$count = mysqli_num_rows($db, $countres);
+    $count = mysqli_num_rows($countres);
     //adjust table by altering count
-    $sql = "UPDATE `Project_Database`.`DEPENDANTS`
-SET
-`User_Id` = `User_Id:`,
-`Name` = `Name:`,
-`Relationship` = `Relationship:`,
-`No-of_allergies` = `No-of_allergies:`
-WHERE `No-of_allergies` = '$count';";
-echo "$sql";
-$result = mysqli_query($db,$sql);
+
+    $sql = "UPDATE `Project_Database`.`DEPENDANTS` SET `No-of_allergies` = '$count' WHERE (`User_Id` = '$User_Id' AND `Name` = '$Name');";
+    $success1 = $db->query($sql);
+//echo "$result";
 if ($result === TRUE) {
   $result = "Successful Submission.";
 } else {
