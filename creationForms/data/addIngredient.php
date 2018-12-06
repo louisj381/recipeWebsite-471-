@@ -56,7 +56,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddIngredient']))
   <!--
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     -->
-  <link rel="stylesheet" href="../styles/body_styles.css">
+  <link rel="stylesheet" href="../../styles/body_styles.css">
 </head>
 <h2>
   Add Ingredient:
