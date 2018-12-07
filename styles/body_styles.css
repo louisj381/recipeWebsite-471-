@@ -46,6 +46,11 @@ input {/* input[type=text] */
   margin: 5px 5px;
   /* border: 2px solid #F0F8FF;/* light */
 }
+input[type=text].break {
+    word-wrap: break-word;
+    word-break: break-all;
+    height: 80px;
+}
 .div {
   margin: 5px 5px;
   /*padding: 5px 15px;*/

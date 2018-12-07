@@ -11,12 +11,14 @@
   <body>
     <table>
       <tr>
+        <!-- <th style="width:auto;">ID</th> -->
         <th>Recipe</th>
         <th>PrepTime</th>
         <!-- <th>CookTime</th> -->
         <th>Rating</th>
         <th>Instructions</th>
       </tr>
+      <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="recipeView"></form>
       <!-- next rows -->
       <?php
         $root = "../";
@@ -24,7 +26,6 @@
         $uID = $_SESSION['user_id'];
         $sqlText = $_SESSION['sqlBrowseRecipe'];
         //echo $_SESSION['sqlBrowseRecipe'] . "<-";
-
         if (empty($_SESSION['sqlBrowseRecipe'])) {
           //leave
           return;
@@ -32,23 +33,28 @@
         $res = $db->query($sqlText);
         if ( $res->num_rows > 0 ) {
           while ( $row = $res->fetch_assoc() ) {
+            $id = $row['Recipe_Id'];
             $name = $row['Name'];
             $prep = $row['PrepTime'];
             #cooktime
+
             $rating = $row['Rating'];
             $instructions = $row['Instructions'];
+            //<td>$id</td>
             echo "
-            <tr>
-             <td>$name</td>
-             <td style=\"text-align:center;\">$prep Minutes</td>
-             <td style=\"text-align:center;\">$rating Stars</td>
-             <td>$instructions</td>
-            </tr>";
+            <tr onClick=\"location.href = '../edit/recipe.php?rId=$id'\">
+
+              <td>$name</td>
+              <td style=\"text-align:center;\">$prep Minutes</td>
+              <td style=\"text-align:center;\">$rating Stars</td>
+              <td>$instructions</td>
+              </tr>";
           }
         } else {
-          echo "<tr><td>None</td><td></td><td></td><td></td></tr>";
+          echo "<tr><td colspan=\"100%\">None</td></tr>";
         }
       ?>
+
     </table>
   </body>
 </html>

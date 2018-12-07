@@ -56,4 +56,35 @@ session_start();
     </form>
 
   </body>
+  <div class="center" style="width:80%;">
+    <h2>Add Meal</h2>
+    <body>
+      <table style="width:100%">
+        <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
+          <tr>
+            <td>Name:</td>
+            <td><input type="text" name="DepName" value=<?php echo "$Name";?>></td>
+          </tr><tr>
+            <td>Relationship:</td>
+            <td><input type="text" name="relationship" value=<?php echo "$Relationship";?>></td>
+          </tr><tr>
+            <td>Recipe:</td>
+            <td><input type="text" name="Allergy"></td>
+          </tr><tr>
+            <td>Severity:</td>
+            <td><input type="number" name="Severity"></td>
+          </tr><tr>
+            <td><input class="button" type="submit" name="addmeal" value="Confirm Recipe"></td>
+            <td><input class="button" type="submit" name="recipe" value="Add Additional Recipe"></td>
+          </tr>
+        </form>
+
+        <form action="../../myStuff/guestbook.php" method="post">
+          <tr>
+            <td colspan="2"><input class="button" type="submit" name="addDependant" value="Close"></td>
+          </tr>
+        </form>
+      </table>
+    </body>
+  </div>
 </html>

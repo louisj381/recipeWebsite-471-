@@ -53,11 +53,10 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddIngredient']))
 <html>
 <head>
   <title> Cake. </title>
-  <!--
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    -->
   <link rel="stylesheet" href="../../styles/body_styles.css">
 </head>
+<div class="center" style="width:80%">
 <h2>Add Ingredient:</h2>
 <body>
   <table style="width:100%">
@@ -69,8 +68,9 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddIngredient']))
   </form>
   <form action="../../myStuff/pantry.php" method="post" id="back"></form>
   <tr>
-    <td><button class="button" style="width:100%" type="submit" name="AddIngredient" value="Add" form="info">Add</button></td>
     <td><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
+    <td><button class="button" style="width:100%" type="submit" name="AddIngredient" value="Add" form="info">Add</button></td>
   </tr>
 </body>
+</div>
 </html>
