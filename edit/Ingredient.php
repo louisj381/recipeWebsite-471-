@@ -1,20 +1,21 @@
 <?php
+//so far just a copy of recipe
 ob_start();
 session_start();
 include("../connection/dbConfig.php");
   // define variables and set to empty values
   $Recipe_Id = $rName = $rPrep = $rCook = $rRate = $rInstr = "";
-  $Recipe_Id = $_GET['rId'];
+  $ingrName = $_GET['i'];
   if ( !$_POST['saveEdits'] && $_SERVER["REQUEST_METHOD"] == "POST" ) {
   //!($_SERVER['HTTP_REFERER'] != $_SERVER['PHP_SELF']) ){
     echo 'updating referer' ;
     $back = $_SERVER['HTTP_REFERER'];
   }
 
-  $sql = "SELECT * FROM `Project_Database`.`RECIPE` WHERE `Recipe_Id` = '$Recipe_Id';";
+  $sql = "SELECT * FROM `Project_Database`.`Ingredient` WHERE `Name` = '$ingrName';";
   $res = $db->query($sql);
-  $recipe = $res->fetch_assoc();
-  //echo $recipe;
+  $ingredient = $res->fetch_assoc();
+  //echo $ingredient;
   $uID = $_SESSION['uID'];
   //get out of here if no work
   if (mysqli_num_rows($res) == 0) {
@@ -27,33 +28,20 @@ include("../connection/dbConfig.php");
     header("location: $back");
     //return;
   } else {
-    $rName = $recipe['Name'];
-    $rPrep = $recipe['PrepTime'];
-    $rCook = $recipe['CookTime'];
-    $rRate = $recipe['Rating'];
-    $rInstr = $recipe['Instructions'];
+    $iName = $ingredient['Name'];
+    $iCal = $ingredient['Cal/g'];
   }
 
   $valid_input = (!empty($_POST['rName']) && !empty($_POST['rPrep']) && !empty($_POST['rCook']) && !empty($_POST['rInstr']));
 
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['saveEdits']) {
     $rName = text_input($_POST['rName']);
-    $rPrep = $_POST['rPrep'];
-    $rCook = $_POST['rCook'];
-    if (empty($_POST['rRate'])){
-      $rRate = "NULL";
-    } else {
-      $rRate = $_POST['rRate'];
-    }
-    $rInstr = $_POST['rInstr'];
+    $iCal= $_POST['rPrep'];
+
     $sql = "UPDATE `Project_Database`.`RECIPE`
-            SET `Name` = '$rName',
-                `PrepTime` = '$rPrep',
-                `CookTime` = '$rCook',
-                `Rating` = '$rRate',
-                `Instructions` = '$rInstr',
-                `creator` = '$uID'
-            WHERE `Recipe_Id` = '$Recipe_Id'
+            SET `Name` = '$iName',
+                `Cal/g` = '$iCal',
+            WHERE `Name` = '$ingrName'
           ";
     $success = $db->query($sql);
     if ($success === TRUE) {
