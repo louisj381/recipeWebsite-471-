@@ -12,22 +12,18 @@ include("../connection/dbConfig.php");
     $back = $_SERVER['HTTP_REFERER'];
   }
 
-  $sql = "SELECT * FROM `Project_Database`.`Ingredient` WHERE `Name` = '$ingrName';";
-  $res = $db->query($sql);
-  $ingredient = $res->fetch_assoc();
+  $sqlIng = "SELECT * FROM `Project_Database`.`Ingredient` WHERE `Name` = '$ingrName';";
+  $res = $db->query($sqlIng);
+
   //echo $ingredient;
   $uID = $_SESSION['uID'];
   //get out of here if no work
   if (mysqli_num_rows($res) == 0) {
     echo "<script type='text/javascript'>alert('oops!\n$db->error');</script>";
-    // if (empty($_GET)) {
-    //   header("location: ../views/recipes.php");
-    // } else {
-    //   header("location: ../../views/recipes.php");
-    // }
     header("location: $back");
     //return;
   } else {
+    $ingredient = $res->fetch_assoc();
     $iName = $ingredient['Name'];
     $iCal = $ingredient['Cal/g'];
   }

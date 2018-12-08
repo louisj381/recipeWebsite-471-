@@ -51,6 +51,21 @@ input[type=text].break {
     word-break: break-all;
     height: 80px;
 }
+.textinput {
+  background-color: #F0F8FF;/* light */
+  border: 2px solid #33334D; /* dark */
+  width:100%;
+  color: #33334D; /* dark */
+  padding: 5px 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: avenir;
+  border-radius: 5px;
+  margin: 5px 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
 .div {
   margin: 5px 5px;
   /*padding: 5px 15px;*/
