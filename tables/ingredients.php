@@ -44,7 +44,7 @@
             </tr>";
           } else {
             echo "
-            <tr onClick=\"location.href = '../edit/Ingredient.php?rId=$id'\">
+            <tr onClick=\"location.href = '../edit/Ingredient.php?iName=$ingredient'\">
              <td style=\"text-align:left;width:80%;\">$ingredient</td>
              <td style=\"text-align:center;width:7%;\">$number</td>
              <td style=\"width:13%;\">$unit</td>

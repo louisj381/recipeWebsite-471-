@@ -45,9 +45,8 @@
             //add the ingredients to recipes
             $sql = "SELECT * FROM `Project_Database`.`RECIPE_CONTAINS` WHERE RECIPE_ID = '$id';";
             $qur = $db->query($sql);
-            echo $sql;
             if ( $qur->num_rows > 0 ) {
-              if ($row = $qur->fetch_assoc())
+              if ($row = $qur->fetch_assoc()) //add the first one
                 $ingredients = $ingredients . $row['Ingredient'];
               while ( $row = $qur->fetch_assoc() ) {
                 $ingredients = $ingredients . ", " . $row['Ingredient'];
