@@ -17,6 +17,7 @@
         <!-- <th>CookTime</th> -->
         <th>Rating</th>
         <th>Instructions</th>
+        <th>Ingredients</th>
       </tr>
       <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="recipeView"></form>
       <!-- next rows -->
@@ -40,6 +41,17 @@
 
             $rating = $row['Rating'];
             $instructions = $row['Instructions'];
+            $ingredients = "";
+            //add the ingredients to recipes
+            $sql = "SELECT * FROM `Project_Database`.`RECIPE_CONTAINS` WHERE RECIPE_ID = '$id';";
+            $qur = $db->query($sql);
+            if ( $qur->num_rows > 0 ) {
+              if ($row = $qur->fetch_assoc()) //add the first one
+                $ingredients = $ingredients . $row['Ingredient'];
+              while ( $row = $qur->fetch_assoc() ) {
+                $ingredients = $ingredients . ", " . $row['Ingredient'];
+              }
+            }
             //<td>$id</td>
             echo "
             <tr onClick=\"location.href = '../edit/recipe.php?rId=$id'\">
@@ -48,6 +60,7 @@
               <td style=\"text-align:center;\">$prep Minutes</td>
               <td style=\"text-align:center;\">$rating Stars</td>
               <td>$instructions</td>
+              <td>$ingredients</td>
               </tr>";
           }
         } else {

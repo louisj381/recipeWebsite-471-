@@ -39,7 +39,7 @@ if( $_POST['btnsubmit'] === "TRUE" ) {
     } else {
       $error = "Account created!";//Go to Login
     }
-    echo "<script type = 'text/javascript'>alert('$error');location.href = '../../index.php'</script>";
+    echo "<script type = 'text/javascript'>alert('$error');location.href = '../../login.php'</script>";
   }
 }
  ?>
@@ -79,7 +79,7 @@ if( $_POST['btnsubmit'] === "TRUE" ) {
      <tr><td>
        <button class="button" name="btnsubmit" value="TRUE" form="submitStd" style="width:100%;">Submit</button>
      </td><td>
-       <button class="button" onClick="location.href = '../../index.php'" style="width:100%;">Cancel</button>
+       <button class="button" onClick="location.href = '../../login.php'" style="width:100%;">Cancel</button>
      </td></tr>
    </table>
  </body>

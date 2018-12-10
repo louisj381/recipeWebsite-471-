@@ -35,7 +35,7 @@ include("../../connection/dbConfig.php");
                     `CookTime` = '$rCook',
                     `Rating` = '$rRate',
                     `Instructions` = '$rInstr',
-                    `creator` = '$uID'
+                    `creator` = '$uID',
                     `Recipe_Id` = '$Recipe_Id')
           ";
     $success = $db->query($sql);
@@ -84,7 +84,7 @@ include("../../connection/dbConfig.php");
     <tr><td>PrepTime:</td><td><input type="number"  name="rPrep" style="width:100%" value="<?php echo ($result=="Missing values!")? $rPrep:'' ?>"></td></tr>
     <tr><td>CookTime:</td><td><input type="number"  name="rCook" style="width:100%" value="<?php echo ($result=="Missing values!")? $rCook:'' ?>"></td></tr>
     <tr><td>Rating:</td><td><input type="text"      name="rRate" style="width:100%" value="<?php echo ($result=="Missing values!")? $rRate:'' ?>"></td></tr>
-    <tr><td colspan="100%"><iframe src="../../tables/ingredients.php?rId=<?echo $uID?>" style="width:100%;height:100%;"><iframe></td></tr>
+    <tr><td colspan="100%"><iframe src="../../tables/ingredients.php?rId=<?echo $Recipe_Id?>" style="width:100%;height:100%;"><iframe></td></tr>
     <tr style="height:40%">
       <td style="padding-top:5px;">Instructions:</td><td> <textarea class="textinput" type="text" name="rInstr" style="margin:auto;width:100%;text-align:left;" form="info"><?php echo ($result=="Missing values!")? $rInstr:'' ?></textarea></td></tr>
   </form>

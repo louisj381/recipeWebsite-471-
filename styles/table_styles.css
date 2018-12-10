@@ -13,6 +13,7 @@ td, th {
 }
 tr:hover {
   background-color: rgba(0,0,0,0.4);
+  cursor: pointer;
 }
 
 .column {
@@ -28,4 +29,27 @@ tr:hover {
     .column {
         width: 100%;
     }
+}
+
+.smallButton {
+  -webkit-transition-duration: 0.2s; /* Safari */
+  transition-duration: 0.2s;
+
+  background-color: #F0F8FF;/* light */
+  border: none;
+  color: #33334D; /* dark */
+  padding: 1px 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  font-family: avenir;
+  border-radius: 1px;
+  margin: 3px 3px;
+  border: 1px solid #F0F8FF;/* light */
+}
+.smallButton:hover {
+  background-color: #c1e2ff;/* darker light */
+  border: 1px solid #F0F8FF;/* light */
+  color: #33334D; /* dark */
 }
