@@ -7,7 +7,7 @@ include("../connection/dbConfig.php");
   $User_Id = $ingrName = $iQuantity = $iUnit = $Recipe_Id = $rName = $rPrep = $rCook = $rRate = $rInstr = "";
  //TODO check this
 //for the merge im gonna say either of these are possible casue i dont wanna go thru and fix every link
- if ( ($ingrName = $_GET['iName']) == NULL )  // if Louis' method isnt being used
+ if ( ($ingrName = $_GET['iName']) == NULL ) {// if Louis' method isnt being used
     $ingrName = $_GET['i'];                   // try Keenan's
  }
   if ( !$_POST['saveEdits'] && !$_POST['delete'] && $_SERVER["REQUEST_METHOD"] == "POST" ) {
