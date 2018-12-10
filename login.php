@@ -61,6 +61,7 @@
       <button class="button" style="width:100%;height:40%" type="submit" name="login" form="loginForm">Login</button>
       <button class="button" style="width:100%;height:30%" type="submit" name="createStdAccount" form="stdUser">Create Standard User</button>
       <button class="button" style="width:100%;height:30%" type="submit" name="createCurAccount" form="curUser">Create Curator</button>
+      <button class="button" style="width:100%;" onClick="location.href = './index.php'">Back</button>
     </div>
   </div>
   <!-- <div class="column4"><p>&nbsp;</p></div> -->

@@ -15,7 +15,7 @@ include("../connection/dbConfig.php");
   $res = $db->query($sql);
   $recipe = $res->fetch_assoc();
   //echo $recipe;
-  $uID = $_SESSION['uID'];
+  $uID = $_SESSION['user_id'];
   //get out of here if no work
   if (mysqli_num_rows($res) == 0) {
     echo "<script type='text/javascript'>alert('oops!\n$db->error');</script>";
@@ -34,7 +34,7 @@ include("../connection/dbConfig.php");
     $rInstr = $recipe['Instructions'];
   }
 
-  //TODO: implement selectable-ingredient table within iframe, to select and edit
+  //TODO: implement selectable-ingredient table within iframe, to select and edit <- I did that
 
   // $sql = "SELECT * FROM `Project_Database`.`RECIPE_CONTAINS` WHERE RECIPE_ID = '$Recipe_Id';";
   // $qur = $db->query($sql);
@@ -46,9 +46,9 @@ include("../connection/dbConfig.php");
   //   }
   // }
 
-  $valid_input = (!empty($_POST['rName']) && !empty($_POST['rPrep']) && !empty($_POST['rCook']) && !empty($_POST['rInstr']));
+  $valid_input = ( !empty($_POST['rName']) && !empty($_POST['rPrep']) && !empty($_POST['rCook']) && !empty($_POST['rInstr']) );
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['saveEdits']) {
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && $valid_input && $_POST['saveEdits']) {
     $rName = text_input($_POST['rName']);
     $rPrep = $_POST['rPrep'];
     $rCook = $_POST['rCook'];
@@ -95,10 +95,7 @@ include("../connection/dbConfig.php");
   <title> Cake. </title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <!-- one of these will work -->
-  <link rel="stylesheet" href="http://localhost/styles/body_styles.css">
   <link rel="stylesheet" href="../styles/body_styles.css">
-  <link rel="stylesheet" href="../../styles/body_styles.css">
-  <link rel="stylesheet" href="../../../styles/body_styles.css">
 
 </head>
 <div class="center" style="width:90%">
@@ -113,14 +110,17 @@ include("../connection/dbConfig.php");
     <tr><td>PrepTime:</td><td><input type="number"  name="rPrep" style="width:100%" value="<?echo $rPrep?>"></td></tr>
     <tr><td>CookTime:</td><td><input type="number"  name="rCook" style="width:100%" value="<?echo $rCook?>"></td></tr>
     <tr><td>Rating:</td><td><input type="text"      name="rRate" style="width:100%" value="<?echo $rRate?>"></td></tr>
+    <tr><td colspan="100%"></td></tr>
     <tr style="height:40%">
       <td>Instructions:</td><td><input type="text" name="rInstr" style="width:100%;height:100%" value="<?echo $rInstr?>"></td></tr>
   </form>
+
   <form action="../tables/recipes.php" method="post" id="back"></form>
   <tr>
     <td><button class="button" style="width:100%" type="submit" name="saveEdits" value="TRUE" form="info">Save</button></td>
     <td><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
   </tr>
   </table>
+  <iframe src="../tables/ingredients.php?rId=<?echo $Recipe_Id?>" style="width:100%;height:40%;" allowTransparency="true"></iframe>
 </body>
 </html>

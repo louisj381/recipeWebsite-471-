@@ -1,4 +1,3 @@
-<!--the information for the server connection--->
 <?php
 
   define('DB_SERVER', 'cpsc471-project-instance.ceecwhryx0kc.us-east-2.rds.amazonaws.com');
