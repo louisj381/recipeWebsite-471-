@@ -50,90 +50,83 @@ else if (isset($_POST['addDependant'])) {
  ?>
 
 <html>
-<head>
-  <title> Cake. </title>
-  <!--
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    -->
-  <link rel="stylesheet" href="../styles/body_styles.css">
-</head>
-<h2>
-  Add Dependant
-</h2>
+  <head>
+    <title> Cake. </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/body_styles.css">
+  </head>
+  <div class="center" style="width:80%;">
+    <h2>Add Dependant</h2>
+    <body>
+      <table style="width:100%">
+        <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
+          <tr>
+            <td>Name:</td>
+            <td><input type="text" name="DepName" value=<?php echo "$Name";?>></td>
+          </tr><tr>
+            <td>Relationship:</td>
+            <td><input type="text" name="relationship" value=<?php echo "$Relationship";?>></td>
+          </tr><tr>
+            <td>Allergy:</td>
+            <td><input type="text" name="Allergy"></td>
+          </tr><tr>
+            <td>Severity:</td>
+            <td><input type="number" name="Severity"></td>
+          </tr><tr>
+            <td><input class="button" type="submit" name="addDependant" value="Confirm Dependant"></td>
+            <td><input class="button" type="submit" name="alergies" value="Add Additional Allergy"></td>
+          </tr>
+        </form>
 
-  <body>
-    <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
+        <form action="../../myStuff/guestbook.php" method="post">
+          <tr>
+            <td colspan="2"><input class="button" type="submit" name="addDependant" value="Close"></td>
+          </tr>
+        </form>
+      </table>
+    </body>
+  </div>
+  <?php
+  //handle addAlergy
+  if (isset($_POST['alergies']) && !empty($_POST['DepName']) && !empty($_POST['relationship']) && !empty($_POST['Allergy']) && !empty($_POST['Severity'])) {
+    $User_Id = $_SESSION['user_id'];
+    $Name = $_POST['DepName'];
+    $Allergy = $_POST['Allergy'];
+    $Severity = $_POST['Severity'];
 
-      Name:
-        <input type="text" name="DepName" value=<?php echo "$Name";?>>
-      <br>
-      <br>
-      Relationship:
-        <input type="text" name="relationship" value=<?php echo "$Relationship";?>>
-      <br>
-      <br>
-      Allergy:
-      <input type="text" name="Allergy">
-      <br>
-      <br>
-      Severity:
-      <input type="number" name="Severity">
-      <br>
-      <br>
-      <input type="submit" name="addDependant" value="Confirm Dependant">
-      <br>
-      <br>
-      <input type="submit" name="alergies" value="add additional Alergy">
+    //begin sql
+    //need to fix mmkay
+    $sql = "INSERT INTO Project_Database.ALLERGY(`User_Id`,`Dep_name`,`Allergy`,`Severity`) VALUES(". $User_Id .",'" . $Name ."','".$Allergy."','".$Severity."');";
+    $result = mysqli_query($db,$sql);
+    if ($result === TRUE) {
+      $sql = "SELECT * FROM `Project_Database`.`ALLERGY` WHERE (`User_Id` = '$User_Id' AND `Dep_name` = '$Name');";
+      $countres = mysqli_query($db,$sql);
+      //$count = mysqli_num_rows($db, $countres);
+      $count = mysqli_num_rows($countres);
+      //adjust table by altering count
 
-      <!-- <input type="submit" name="browse" value="Browse"> -->
-    </form>
-
-    <form action="../../myStuff/guestbook.php" method="post">
-    <input type="submit" name="addDependant" value="Close">
-    </form>
-
-
-<?php
-//handle addAlergy
-if (isset($_POST['alergies']) && !empty($_POST['DepName']) && !empty($_POST['relationship']) && !empty($_POST['Allergy']) && !empty($_POST['Severity'])) {
-  $User_Id = $_SESSION['user_id'];
-  $Name = $_POST['DepName'];
-  $Allergy = $_POST['Allergy'];
-  $Severity = $_POST['Severity'];
-
-  //begin sql
-  //need to fix mmkay
-  $sql = "INSERT INTO Project_Database.ALLERGY(`User_Id`,`Dep_name`,`Allergy`,`Severity`) VALUES(". $User_Id .",'" . $Name ."','".$Allergy."','".$Severity."');";
-  $result = mysqli_query($db,$sql);
+      $sql = "UPDATE `Project_Database`.`DEPENDANTS` SET `No-of_allergies` = '$count' WHERE (`User_Id` = '$User_Id' AND `Name` = '$Name');";
+      $success1 = $db->query($sql);
+  //echo "$result";
   if ($result === TRUE) {
-    $sql = "SELECT * FROM `Project_Database`.`ALLERGY` WHERE (`User_Id` = '$User_Id' AND `Dep_name` = '$Name');";
-    $countres = mysqli_query($db,$sql);
-    //$count = mysqli_num_rows($db, $countres);
-    $count = mysqli_num_rows($countres);
-    //adjust table by altering count
+    $result = "Successful Submission.";
+  } else {
+    $result = "Unsuccessful Submission.";
+  }
+  }
+  else {
+    $result = "Unsuccessful Submission.(Insert failed)";
+  }
+    echo "<script type='text/javascript'>alert('$result');</script>";
 
-    $sql = "UPDATE `Project_Database`.`DEPENDANTS` SET `No-of_allergies` = '$count' WHERE (`User_Id` = '$User_Id' AND `Name` = '$Name');";
-    $success1 = $db->query($sql);
-//echo "$result";
-if ($result === TRUE) {
-  $result = "Successful Submission.";
-} else {
-  $result = "Unsuccessful Submission.";
-}
-}
-else {
-  $result = "Unsuccessful Submission.(Insert failed)";
-}
-  echo "<script type='text/javascript'>alert('$result');</script>";
+  }//end of POST
+  else if (isset($_POST['alergies'])) {
+    $message = "no allergy to add!";
+    echo "<script type='text/javascript'>alert('$message');</script>";
+  }
 
-}//end of POST
-else if (isset($_POST['alergies'])) {
-  $message = "no allergy to add!";
-  echo "<script type='text/javascript'>alert('$message');</script>";
-}
-
-?>
+  ?>
 
 
-  </body>
+
 </html>

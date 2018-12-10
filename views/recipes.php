@@ -18,9 +18,9 @@
   <h2> My Recipes: </h2>
   <body>
     <iframe src="../tables/recipes.php" style="width:100%;height:40%;"></iframe>
-
-    <!-- <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="addrecipe"></form>
-    <button class="button" style="width:100%;" form="addrecipe">Add</button> -->
+    <!-- <p>Selected Recipe: <? echo isset($_POST['recipe_select_1']) ?></p> -->
+    <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="refresh"></form>
+    <button class="button" style="width:100%;" form="refresh">Refresh</button>
     <button class="button" style="width:100%;" onClick="location.href = '../creationForms/data/addRecipe.php'">Add Recipe</button>
     <button class="button" style="width:100%;" onClick="location.href = '../views/homepage.php'">Go Back</button>
   </body>
