@@ -17,7 +17,7 @@
 <div class="center" style="width:80%;">
   <h2> My Recipes: </h2>
   <body>
-    <iframe src="../tables/recipes.php" style="width:100%;height:40%;"></iframe>
+    <iframe src="../tables/recipes.php" style="width:100%;height:60%;"></iframe>
     <!-- <p>Selected Recipe: <? echo isset($_POST['recipe_select_1']) ?></p> -->
     <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="refresh"></form>
     <button class="button" style="width:100%;" form="refresh">Refresh</button>

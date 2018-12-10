@@ -20,7 +20,7 @@
       <button class="button" style="width:100%;" onClick="location.href = '../myStuff/pantry.php'">Pantry</button>
       <button class="button" style="width:100%;" onClick="location.href = '../myStuff/guestbook.php'">Guestbook</button>
       <button class="button" style="width:100%;" onClick="location.href = '../myStuff/account.php'">Account</button>
-      <button class="button" style="width:100%;" onClick="location.href = '../index.php'">Logout</button>
+      <button class="button" style="width:100%;" onClick="location.href = '../login.php'">Logout</button>
     </div>
     <div class="column4"><p>&nbsp;</p></div>
   </body>
