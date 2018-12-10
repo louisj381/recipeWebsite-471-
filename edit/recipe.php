@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include("../connection/dbConfig.php");
   // define variables and set to empty values
-  $Recipe_Id = $rName = $rPrep = $rCook = $rRate = $rInstr = "";
+  $Recipe_Id = $rName = $rPrep = $rCook = $rRate = $rInstr = $rIngred = "";
   $Recipe_Id = $_GET['rId'];
   if ( !$_POST['saveEdits'] && $_SERVER["REQUEST_METHOD"] == "POST" ) {
   //!($_SERVER['HTTP_REFERER'] != $_SERVER['PHP_SELF']) ){
@@ -33,6 +33,18 @@ include("../connection/dbConfig.php");
     $rRate = $recipe['Rating'];
     $rInstr = $recipe['Instructions'];
   }
+
+  //TODO: implement selectable-ingredient table within iframe, to select and edit <- I did that
+
+  // $sql = "SELECT * FROM `Project_Database`.`RECIPE_CONTAINS` WHERE RECIPE_ID = '$Recipe_Id';";
+  // $qur = $db->query($sql);
+  // if ( $qur->num_rows > 0 ) {
+  //   if ($row = $qur->fetch_assoc()) //add the first one
+  //     $ingredients = $ingredients . $row['Ingredient'];
+  //   while ( $row = $qur->fetch_assoc() ) {
+  //     $ingredients = $ingredients . ", " . $row['Ingredient'];
+  //   }
+  // }
 
   $valid_input = ( !empty($_POST['rName']) && !empty($_POST['rPrep']) && !empty($_POST['rCook']) && !empty($_POST['rInstr']) );
 

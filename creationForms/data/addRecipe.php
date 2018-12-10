@@ -35,7 +35,7 @@ include("../../connection/dbConfig.php");
                     `CookTime` = '$rCook',
                     `Rating` = '$rRate',
                     `Instructions` = '$rInstr',
-                    `creator` = '$uID'
+                    `creator` = '$uID',
                     `Recipe_Id` = '$Recipe_Id')
           ";
     $success = $db->query($sql);
