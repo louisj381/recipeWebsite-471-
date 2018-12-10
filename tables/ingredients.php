@@ -18,7 +18,7 @@
     $unit = $irow['Unit'];
     echo "
     <tr style=\"$style\">
-      <td><button onClick=\"location.href = '../edit/ingredient.php?rId=$rec&i=$ingredient'\">Edit</button></td>
+      <td><button class=\"smallButton\" onClick=\"location.href = '../edit/ingredient.php?rId=$rec&i=$ingredient'\">Edit</button></td>
       <td onClick=\"toggleInRecipe($rec,'$ingredient')\" style=\"text-align:left;width:80%;\">$ingredient</td>
       <td onClick=\"toggleInRecipe($rec,'$ingredient')\" style=\"text-align:center;width:7%;\">$number</td>
       <td onClick=\"toggleInRecipe($rec,'$ingredient')\" style=\"width:13%;\">$unit</td>
