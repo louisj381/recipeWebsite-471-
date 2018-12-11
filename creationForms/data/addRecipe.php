@@ -7,13 +7,14 @@ include("../../connection/dbConfig.php");
 
   if ( !$_POST['saveEdits'] && $_SERVER["REQUEST_METHOD"] == "POST" ) {
   //!($_SERVER['HTTP_REFERER'] != $_SERVER['PHP_SELF']) ){
-    echo 'updating referer' ;
+    //echo 'updating referer' ;
     $back = $_SERVER['HTTP_REFERER'];
   }
 
   $sql = "SELECT * FROM `Project_Database`.`RECIPE`;";
   $res = $db->query($sql);
   $Recipe_Id = mysqli_num_rows($res);
+  //echo $Recipe_Id;
   $uID = $_SESSION['uID'];
 
   $valid_input = (!empty($_POST['rName']) && !empty($_POST['rPrep']) && !empty($_POST['rCook']) && !empty($_POST['rInstr']));
@@ -22,6 +23,12 @@ include("../../connection/dbConfig.php");
   $rCook = $_POST['rCook'];
   $rRate = $_POST['rRate'];
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $valid_input && $_POST['addRecipe']) {
+    //more code of a desperate man
+    $rName = text_input($_POST['rName']);
+    $rPrep = $_POST['rPrep'];
+    $rCook = $_POST['rCook'];
+    $rRate = $_POST['rRate'];
+    $uID = $_SESSION['uID'];
 
     if (empty($_POST['rRate'])){
       $rRate = "NULL";
@@ -29,20 +36,18 @@ include("../../connection/dbConfig.php");
       $rRate = $_POST['rRate'];
     }
     $rInstr = $_POST['rInstr'];
+    $Recipe_Id = ($Recipe_Id <> NULL)? $Recipe_Id : $_GET['rId'];
+    // echo $Recipe_Id;
+
     $sql = "INSERT INTO `Project_Database`.`RECIPE`
-            VALUES (`Name` = '$rName',
-                    `PrepTime` = '$rPrep',
-                    `CookTime` = '$rCook',
-                    `Rating` = '$rRate',
-                    `Instructions` = '$rInstr',
-                    `creator` = '$uID',
-                    `Recipe_Id` = '$Recipe_Id')
-          ";
+                    (`Recipe_Id`,`Name`,`PrepTime`, `CookTime`, `Rating`, `Instructions`, `creator`)
+            VALUES ('$Recipe_Id', '$rName', '$rPrep', '$rCook', '$rRate', '$rInstr', '$uID' )";
     $success = $db->query($sql);
-    if ($success === TRUE) {
-      $result = "Successful Saving Changes";
+    // echo $sql;
+    if ($success == TRUE) {
+      $result = "Successful Saving Changes: " . $db->error;
     } else {
-      $result = "Unsuccessful Saving Changes";
+      $result = "Unsuccessful Saving Changes: " . $db->error;
     }
 
   }//end post
@@ -66,11 +71,7 @@ include("../../connection/dbConfig.php");
   <title> Cake. </title>
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <!-- one of these will work -->
-  <link rel="stylesheet" href="http://localhost/styles/body_styles.css">
-  <link rel="stylesheet" href="../styles/body_styles.css">
   <link rel="stylesheet" href="../../styles/body_styles.css">
-  <link rel="stylesheet" href="../../../styles/body_styles.css">
-
 </head>
 <div class="center" style="width:80%">
 <body>
@@ -84,15 +85,21 @@ include("../../connection/dbConfig.php");
     <tr><td>PrepTime:</td><td><input type="number"  name="rPrep" style="width:100%" value="<?php echo ($result=="Missing values!")? $rPrep:'' ?>"></td></tr>
     <tr><td>CookTime:</td><td><input type="number"  name="rCook" style="width:100%" value="<?php echo ($result=="Missing values!")? $rCook:'' ?>"></td></tr>
     <tr><td>Rating:</td><td><input type="text"      name="rRate" style="width:100%" value="<?php echo ($result=="Missing values!")? $rRate:'' ?>"></td></tr>
-    <tr><td colspan="100%"><iframe src="../../tables/ingredients.php?rId=<?echo $Recipe_Id?>" style="width:100%;height:100%;"><iframe></td></tr>
-    <tr style="height:40%">
-      <td style="padding-top:5px;">Instructions:</td><td> <textarea class="textinput" type="text" name="rInstr" style="margin:auto;width:100%;text-align:left;" form="info"><?php echo ($result=="Missing values!")? $rInstr:'' ?></textarea></td></tr>
+
+    <tr>
+      <td style="padding-top:5px;">Instructions:</td><td>
+      <textarea class="textinput" type="text" name="rInstr" style="margin:auto;width:100%;text-align:left;" form="info">
+        <?php echo ($result=="Missing values!")? $rInstr:"" ?>
+      </textarea></td>
+    </tr>
   </form>
   <form action="../../views/recipes.php" method="post" id="back"></form>
   <tr>
     <td><button class="button" style="width:100%" type="submit" name="addRecipe" value="TRUE" form="info">Save</button></td>
     <td><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
   </tr>
+  <tr><td colspan="100%"><iframe src="../../tables/ingredients.php?rId=<?echo $Recipe_Id?>" style="width:100%;height:150%;"><iframe></td></tr>
   </table>
 </body>
+</div>
 </html>
