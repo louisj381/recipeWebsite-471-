@@ -16,7 +16,7 @@
         $mypassword = $_POST['password'];
 
         //  ... ,SHA2('password',256), ...
-        $sql = "SELECT User_Id FROM END_USER WHERE Screen_Name = '$myusername' AND Hashed_Password = SHA2('$mypassword',256);";
+        $sql = "SELECT * FROM END_USER WHERE Screen_Name = '$myusername' AND Hashed_Password = SHA2('$mypassword',256);";
         $result = mysqli_query($db,$sql);
         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
         $count = mysqli_num_rows($result);
@@ -25,7 +25,12 @@
 
         if($count == 1) {
            $_SESSION['user_id'] = $row['User_Id'];
-           header("location: views/homepage.php");
+           $_SESSION['Curator_Flag'] = $row['Curator_Flag'];
+           if ( $_SESSION['Curator_Flag'] == 1 ) {
+             header("location: views/curatorHomepage.php");
+           } else {
+             header("location: views/standardHomepage.php");
+           }
         }else {
            $error = "Your Login Name or Password is invalid";
            echo "<script type='text/javascript'>alert('$error');</script>";
@@ -48,9 +53,9 @@
       <form action="" method="post" id="loginForm" style="width:100%;">
         <table style="width:100%;">
           <tr><td>Username:</td><td>
-          <input type="text" name="username" value="happy_dude123" class="column" style="width:100%;"></td></tr>
+          <input type="text" name="username" value="paidUser" class="column" style="width:100%;"></td></tr>
           <tr><td>Password:</td><td>
-          <input type="password" name="password" value="password123" class="column" style="width:100%;"></td></tr>
+          <input type="password" name="password" value="1234" class="column" style="width:100%;"></td></tr>
         </table>
       </form>
     </div>

@@ -3,6 +3,10 @@ ob_start();
 session_start();
 define(root, "../../");
 include ("../connection/dbConfig.php");
+$homepage = "../views/standardHomepage.php";
+if ($_SESSION['Curator_Flag'] == 1)
+  $homepage = "../views/curatorHomepage.php";
+
 
 if( isset($_POST['btnbrowse'] )) {
  $browse = $_POST['browse'];
@@ -26,6 +30,16 @@ $_SESSION['sqlMealPlan'] = $sqlmealPlan;
     <!--
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       -->
+      <style>
+      /* extra stuff keenan would be proud of maybe */
+        input[name=browse] {  
+          background-image: url("../misc/search.png");
+          background-position: left;
+          background-size: contain;
+          background-repeat: no-repeat;
+          padding: 5px 20px 5px 40px;
+        }
+      </style>
     <link rel="stylesheet" href="../styles/body_styles.css">
   </head>
   <!-- THIS IS THE BROWSE FRAME -->
@@ -35,7 +49,7 @@ $_SESSION['sqlMealPlan'] = $sqlmealPlan;
       <table style="width:100%;">
         <tr>
           <td style="width:10%;">Search:</td>
-          <td style="width:85%;"><input type="text" name="browse" style="width:100%;"></td>
+          <td style="width:85%;"><input type="text" name="browse" style="width:100%;" placeholder="Search..."></td>
           <td style="width:5%;"><button class="button" type = "submit" name = "btnbrowse" value = "Search">Go!</button></td>
         </tr>
       </table>
@@ -46,7 +60,8 @@ $_SESSION['sqlMealPlan'] = $sqlmealPlan;
       <iframe src="../tables/recipes.php" style="width:100%;height:30%;"></iframe><br><br>
       <h3> Meals: </h3>
       <iframe src="../tables/meals.php" style="width:100%;height:30%;"></iframe></body>
-    <form action="../views/homepage.php" method="post" id="back"></form>
+    <form action=<?php echo $homepage?> method="post" id="back"></form>
+
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="refresh"></form>
     <table style="width:100%;">
       <tr>
