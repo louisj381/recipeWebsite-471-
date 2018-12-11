@@ -1,6 +1,9 @@
 <?php
   ob_start();
   session_start();
+  $homepage = "../views/standardHomepage.php";
+  if ($_SESSION['Curator_Flag'] == 1)
+    $homepage = "../views/curatorHomepage.php";
  ?>
 
 
@@ -129,7 +132,8 @@
       <tr><td><button class="button" style="width:100%;" form="updateForm">Save Changes.</button></td>
       <input type="hidden" name="changes" value="TRUE">
     </form>
-      <td><button class="button" style="width:100%;" onClick="location.href = '../views/homepage.php'">Go Back</button></td></tr>
+    <form action="<?php echo $homepage?>" method="post" id="back"></form>
+    <button class="button" style="width:100%;" type="submit" name="back" value="Back to My Stuff" form="back">Back to My Stuff</button>
   </table>
  <p>&nbsp;</p>
 </body>
