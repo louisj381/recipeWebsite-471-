@@ -11,7 +11,7 @@
 
 
 <div class="center" style="width:80%;">
-  <h2> My Recipes: </h2>
+  <h2> My Meals: </h2>
   <body>
     <iframe src="../tables/meals.php" style="width:100%;height:40%;"></iframe>
 
