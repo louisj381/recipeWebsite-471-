@@ -8,21 +8,21 @@ include("../../connection/dbConfig.php");
 
   //TODO update meal contains
 
-  $sql = "SELECT * FROM `Project_Database`.`RECIPE_CONTAINS`
-          WHERE `Ingredient` = '$ingrName' AND `Recipe_Id` = '$Recipe_Id';";
+  $sql = "SELECT * FROM `Project_Database`.`MEAL_CONTAINS`
+          WHERE `Meal_Id` = '$Meal_Id' AND `Recipe_Id` = '$Recipe_Id';";
   $find = $db->query($sql);
   //$find->fetch_assoc();
   //TOGGLE
   //print_r($find);
   $success = false;
   if (mysqli_num_rows($find) == 0) {
-    $add = "INSERT INTO `Project_Database`.`RECIPE_CONTAINS` (`Recipe_Id`, `Ingredient`, `Quantity`, `Unit`)
-            VALUES ( '$Recipe_Id' , '$ingrName' , 1, 'cup');";
+    $add = "INSERT INTO `Project_Database`.`MEAL_CONTAINS` (`Meal_Id`, `Recipe_Id`)
+            VALUES ( '$Meal_Id', '$Recipe_Id' );";
     $success = $db->query($add);
   } else {
     //remove ingredient
-    $delete = "DELETE FROM `Project_Database`.`RECIPE_CONTAINS`
-                WHERE `Ingredient` = '$ingrName' AND `Recipe_Id` = '$Recipe_Id';";
+    $delete = "DELETE FROM `Project_Database`.`MEAL_CONTAINS`
+                WHERE `Meal_Id` = '$Meal_Id' AND `Recipe_Id` = '$Recipe_Id';";
     $success = $db->query($delete);
   }
   //can echo success here to return a result
