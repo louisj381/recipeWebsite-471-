@@ -32,8 +32,8 @@ $_SESSION['sqlMealPlan'] = $sqlmealPlan;
       -->
       <style>
       /* extra stuff keenan would be proud of maybe */
-        input[name=browse] {  
-          background-image: url("../misc/search.png");
+        input[name=browse] {
+          background-image: url("../icons/search.png");
           background-position: left;
           background-size: contain;
           background-repeat: no-repeat;
