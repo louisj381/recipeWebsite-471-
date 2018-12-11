@@ -27,10 +27,11 @@
         if ( $res->num_rows > 0 ) {
           while ( $row = $res->fetch_assoc() ) {
             $name = $row['Meal_type'];
+            $id = $row['Meal_Id'];
             echo "
-            <tr>
+            <tr onClick=\"location.href = '../edit/meal.php?mId=$id'\">
              <td>$name</td>
-            </tr>";
+            </tr>"; //maybe include tags in this
           }
         } else {
           echo "<tr><td>None</td></tr>";
