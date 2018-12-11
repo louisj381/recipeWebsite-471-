@@ -4,35 +4,42 @@ ob_start();
 session_start();
 include("../connection/dbConfig.php");
   // define variables and set to empty values
-  if ( !$_POST['saveEdits'] && !$_POST['delete'] && $_SERVER["REQUEST_METHOD"] == "POST" ) {
-    echo 'updating referer' ;
-    $back = $_SERVER['HTTP_REFERER'];
-  }
-
-  $Meal_Id = $Meal_type = "";
-  $Meal_Id = $_GET['mId'];
+  $MealPlan_Id = $Meal_type = "";
+  $MealPlan_Id = $_GET['mpId'];
   $uID = $_SESSION['user_id'];
 
-  $sql = "SELECT * FROM `Project_Database`.`MEAL` WHERE `Meal_Id` = '$Meal_Id';";
+  $sql = "SELECT * FROM `Project_Database`.`MEAL_PLAN` WHERE `MealPlan_Id` = '$MealPlan_Id';";
   $res = $db->query($sql);
-  $mealRow = $res->fetch_assoc();
+  $mpRow = $res->fetch_assoc();
 
   //get out of here if no work
   if (mysqli_num_rows($res) == 0) {
     echo "<script type='text/javascript'>alert('oops!\n$db->error');</script>";
     header("location: $back");  //this sends a redirect to the user instead of this page
   } else {
-    $mName = $Meal_type = $mealRow['Meal_type'];
+    $mpName = $mpRow['Name'];
+    $nMeals = $mpRow['NumberOfMeals'];
+    $creator = $mpRow['Creator'];
   }
+  //count meals
+  $sql = "SELECT COUNT(*) FROM `Project_Database`.`MEAL_PLAN_CONTAINS` WHERE `MealPlan_Id` = '$MealPlan_Id';";
+  $res = $db->query($sql);
+  $nMeals = mysqli_num_rows($res);
 
+  //get creator name
+  $sql = "SELECT Screen_Name FROM `Project_Database`.`END_USER` WHERE `User_Id` = '$creator';";
+  $res = $db->query($sql);
+  $cRow = $res->fetch_assoc();
+  $creator = $cRow['Screen_Name'];
 
-  $valid_input = ( !empty($_POST['mName']) );
+  $valid_input = ( !empty($_POST['mpName']) );
 
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $valid_input && $_POST['saveEdits']) {
-    $mName = text_input($_POST['mName']);
-    $sql = "UPDATE `Project_Database`.`MEAL`
-            SET `Meal_type` = '$mName'
-            WHERE `Meal_Id` = '$Meal_Id' ;";
+    $mpName = text_input($_POST['mpName']);
+    $sql = "UPDATE `Project_Database`.`MEAL_PLAN`
+            SET `Name` = '$mpName',
+                `NumberOfMeals` = '$nMeals'
+            WHERE `MealPlan_Id` = '$MealPlan_Id' ;";
     $success = $db->query($sql);
 
     if ($success === TRUE) {
@@ -71,8 +78,10 @@ include("../connection/dbConfig.php");
     <td><?php echo "<p>$result</p>";?></td></tr>
   </table>
   <table style="width:100%">
-  <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?mId=$Meal_Id";?> method="post" id="info">
-    <tr><td>Meal Name:</td><td><input type="text" name="mName" style="width:100%" value="<?echo $mName?>"></td></tr>
+  <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?mpId=$MealPlan_Id";?> method="post" id="info">
+    <tr><td>MealPlan Name:</td><td><input type="text" name="mpName" style="width:100%" value="<?echo $mpName?>"></td></tr>
+    <tr><td># Meals:</td><td><input type="text" name="nMeals" style="width:100%" value="<?echo $nMeals?>"></td></tr>
+    <tr><td>Creator:</td><td><input type="text" name="creator" style="width:100%" value="<?echo $creator?>"></td></tr>
   </form>
   <form action="../tables/meals.php" method="post" id="back"></form>
   <tr>
