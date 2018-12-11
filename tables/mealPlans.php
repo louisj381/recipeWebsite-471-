@@ -28,7 +28,7 @@
           while ( $row = $res->fetch_assoc() ) {
             $name = $row['Name'];
             echo "
-            <tr>
+            <tr onClick=\"location.href = '../edit/mealPlan.php?mpId=$id'\">
              <td>$name</td>
             </tr>";
           }
