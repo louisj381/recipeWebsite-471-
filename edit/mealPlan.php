@@ -4,7 +4,7 @@ ob_start();
 session_start();
 include("../connection/dbConfig.php");
   // define variables and set to empty values
-  $MealPlan_Id = $Meal_type = "";
+  $MealPlan_Id = $mpName = $nMeals = $creator = "";
   $MealPlan_Id = $_GET['mpId'];
   $uID = $_SESSION['user_id'];
 
@@ -15,7 +15,7 @@ include("../connection/dbConfig.php");
   //get out of here if no work
   if (mysqli_num_rows($res) == 0) {
     echo "<script type='text/javascript'>alert('oops!\n$db->error');</script>";
-    header("location: $back");  //this sends a redirect to the user instead of this page
+    header("location: $back");  //this sends a redirect to the user instead of this page PS TODO this is broken i think
   } else {
     $mpName = $mpRow['Name'];
     $nMeals = $mpRow['NumberOfMeals'];
@@ -79,16 +79,16 @@ include("../connection/dbConfig.php");
   </table>
   <table style="width:100%">
   <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?mpId=$MealPlan_Id";?> method="post" id="info">
-    <tr><td>MealPlan Name:</td><td><input type="text" name="mpName" style="width:100%" value="<?echo $mpName?>"></td></tr>
-    <tr><td># Meals:</td><td><input type="text" name="nMeals" style="width:100%" value="<?echo $nMeals?>"></td></tr>
-    <tr><td>Creator:</td><td><input type="text" name="creator" style="width:100%" value="<?echo $creator?>"></td></tr>
+    <tr><td>MealPlan Name:</td><td><input type="text" name="mpName" style="width:100%" value="<?= $mpName?>"></td></tr>
+    <tr><td># Meals:</td><td><input type="text" name="nMeals" style="width:100%" value="<?= $nMeals?>"></td></tr>
+    <tr><td>Creator:</td><td><input type="text" name="creator" style="width:100%" value="<?= $creator?>"></td></tr>
   </form>
-  <form action="../tables/meals.php" method="post" id="back"></form>
+  <form action="../tables/mealPlans.php" method="post" id="back"></form>
   <tr>
     <td><button class="button" style="width:100%" type="submit" name="saveEdits" value="TRUE" form="info">Save</button></td>
     <td><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
   </tr>
   </table>
-  <iframe src="../tables/recipes.php?mId=<?echo $Meal_Id?>" style="width:100%;height:40%;" allowTransparency="true"></iframe>
+  <iframe src="../tables/meals.php?mpId=<?= $MealPlan_Id?>" style="width:100%;height:40%;" allowTransparency="true"></iframe>
 </body>
 </html>
