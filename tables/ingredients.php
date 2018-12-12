@@ -73,8 +73,12 @@
         $root = "../";
         include($root . "connection/dbConfig.php");  //to access db
         $uID = $_SESSION['user_id'];
-        //to get the ingredients for this user
-        $sqlText = "SELECT * FROM USER_INGREDIENTS WHERE User_Id =" . $uID .";";
+
+        if ($rId == NULL) {//to get the ingredients for this user
+          $sqlText = "SELECT * FROM USER_INGREDIENTS WHERE User_Id =" . $uID .";";
+        } else {  //all
+          $sqlText = "SELECT * FROM USER_INGREDIENTS;";
+        }
         $res = $db->query($sqlText);
 
         //copy the ingredients in the thing into an array to check later
