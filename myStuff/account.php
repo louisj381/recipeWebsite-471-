@@ -129,11 +129,11 @@
    ?>
 <!--Change Password-->
       <tr><td>New Password: </td><td><input type="text" name="new_pass" style="width:100%;"></td></tr>
-      <tr><td><button class="button" style="width:100%;" form="updateForm">Save Changes.</button></td>
+      <tr><td colspan="100%"><button class="button" style="width:100%;" form="updateForm">Save Changes.</button></td></tr>
       <input type="hidden" name="changes" value="TRUE">
     </form>
     <form action="<?php echo $homepage?>" method="post" id="back"></form>
-    <button class="button" style="width:100%;" type="submit" name="back" value="Back to My Stuff" form="back">Back to My Stuff</button>
+    <tr><td colspan="100%"><button class="button" style="width:100%;" type="submit" name="back" value="Back to My Stuff" form="back">Back to My Stuff</button></td></tr>
   </table>
  <p>&nbsp;</p>
 </body>

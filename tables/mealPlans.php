@@ -15,7 +15,7 @@
         if (this.readyState == 4 && this.status == 200) {
           //var response = this.responseText;
           console.log(this.responseText);//shows all echos and prints from target php in the console!
-          //location.reload();
+          location.reload();
         }
       };
       xhttp.open("GET", "add/mealPlan.php?mpId=" + mealPlan + "&req=" + Math.random());
@@ -25,7 +25,7 @@
   <body>
     <table>
       <tr>
-        <th>Meal Plan</th>
+        <th colspan="2">Meal Plan</th>
         <th># Meals</th>
       </tr>
       <!-- next rows -->
@@ -42,26 +42,43 @@
 
         $res = $db->query($sqlText);
         if ( $res->num_rows > 0 ) {
+          $inMyStuff = array("");
+          //make array of all meals i dont have
+          //TODO add this to the other tables
+          if ( $browsing ) {
+            $select = 'MealPlan_Id';
+            $sqlInMyStuff = "SELECT `$select` FROM `Project_Database`.`USER_MEAL_PLANS` WHERE `User_Id` = '$uID';";
+            $inMyStuffResult = $db->query($sqlInMyStuff);
+            if ( $inMyStuffResult->num_rows > 0  ){
+              while ( $row = $inMyStuffResult->fetch_assoc() ) { array_push($inMyStuff, $row[$select]); }
+            }
+          }
           while ( $row = $res->fetch_assoc() ) {
             $name = ucwords($row['Name']);
             $id = $row['MealPlan_Id'];
             $nMeals = $row['NumberOfMeals'];
-            if ($browsing == true){
+            if ( $browsing ){
+              if (!in_array($id, $inMyStuff)) { //in is an array holding my meals
+                $mine = '<img src="../icons/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
+              } else {
+                $mine = '<img src="../icons/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
+              }//<td style=\"width:26px\">$mine</td>
               echo "
               <tr onClick=\"toggleUser($id)\">
-               <td style=\"width:85%\">$name</td>
-               <td style=\"width:15%\">$nMeals</td>
+                <td style=\"width:26px\">$mine</td>
+                <td style=\"width:85%\">$name</td>
+                <td style=\"width:15%\">$nMeals</td>
               </tr>";
             } else {
               echo "
               <tr onClick=\"location.href = '../edit/mealPlan.php?mpId=$id'\">
-               <td style=\"width:85%\">$name</td>
+               <td style=\"width:85%\" colspan=\"2\">$name</td>
                <td style=\"width:15%\">$nMeals</td>
               </tr>";
             }
           }
         } else {
-          echo "<tr><td>None</td></tr>";
+          echo "<tr><td colspan=\"100%\">None</td></tr>";
         }
       ?>
     </table>

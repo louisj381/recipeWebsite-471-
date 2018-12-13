@@ -5,9 +5,9 @@
 
   function printBrowse( $name, $id, $inMyStuff ) {
     if (!in_array($id, $inMyStuff)) { //in is an array holding my meals
-      $mine = '<img src="../icons/notMine.png" alt=" " style="width:24px;height:24px;border:0">';
+      $mine = '<img src="../icons/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
     } else {
-      $mine = '<img src="../icons/mine.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
+      $mine = '<img src="../icons/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
     }
     echo "
     <tr onClick=\"toggleUser($id)\">
@@ -16,7 +16,7 @@
     </tr>"; //maybe include tags in this
   }
 
-  function printReg( $name ) {
+  function printReg( $name , $id) {
     echo "
     <tr onClick=\"location.href = '../edit/meal.php?mId=$id'\">
       <td colspan=\"100%\">$name</td>
@@ -94,7 +94,6 @@
           $inMyStuff = array("");
           $inMealPlan = array("");
           //make array of all meals i dont have
-          //TODO add this to the other tables
           if ( $browsing ) {
             $sqlInMyStuff = "SELECT `Meal_Id` FROM `Project_Database`.`USER_MEALS` WHERE `User_Id` = '$uID';";
             $inMyStuffResult = $db->query($sqlInMyStuff);
@@ -119,7 +118,7 @@
             if ($browsing) {
               printBrowse($name, $id, $inMyStuff);
             } else if ($MealPlan_Id == NULL) {
-              printReg($name);
+              printReg($name, $id);
             } else {
               printToggle($name, $id, $inMealPlan, $MealPlan_Id);
             }
