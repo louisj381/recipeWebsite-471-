@@ -3,10 +3,16 @@
   session_start();
   //// TODO: make browse flag so peeps can add recipes/meals to their list easily
 
-  function printBrowse( $name, $id ) {
+  function printBrowse( $name, $id, $inMyStuff ) {
+    if (!in_array($id, $inMyStuff)) { //in is an array holding my meals
+      $mine = '<img src="../icons/notMine.png" alt=" " style="width:24px;height:24px;border:0">';
+    } else {
+      $mine = '<img src="../icons/mine.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
+    }
     echo "
     <tr onClick=\"toggleUser($id)\">
-      <td colspan=\"100%\">$name</td>
+      <td style=\"width:26px\">$mine</td>
+      <td>$name</td>
     </tr>"; //maybe include tags in this
   }
 
@@ -66,7 +72,7 @@
   <body>
     <table>
       <tr>
-        <th colspan="2">Meal</th>
+        <th colspan="100%">Meal</th>
       </tr>
       <!-- next rows -->
       <?php
@@ -85,8 +91,19 @@
         $res = $db->query($sqlText);
 
         if ( $res->num_rows > 0 ) {
-          //make array of all recipes in that meal
+          $inMyStuff = array("");
           $inMealPlan = array("");
+          //make array of all meals i dont have
+          //TODO add this to the other tables
+          if ( $browsing ) {
+            $sqlInMyStuff = "SELECT `Meal_Id` FROM `Project_Database`.`USER_MEALS` WHERE `User_Id` = '$uID';";
+            $inMyStuffResult = $db->query($sqlInMyStuff);
+            if ( $inMyStuffResult->num_rows > 0  ){
+              while ( $row = $inMyStuffResult->fetch_assoc() ) { array_push($inMyStuff, $row['Meal_Id']); }
+            }
+          } else // ya this is supposed to be here
+          //end of that part
+          //make array of all recipes in that meal
           if ( $MealPlan_Id <> NULL ) {
             $sqlInMealPlan = "SELECT `MEAL_PLAN_CONTAINS`.`Meal_Id` FROM `Project_Database`.`MEAL_PLAN_CONTAINS` WHERE `MealPlan_Id` = '$MealPlan_Id';";
             $inMealPlanResult = $db->query($sqlInMealPlan);
@@ -100,7 +117,7 @@
             $name = $row['Meal_type'];
             $id = $row['Meal_Id'];
             if ($browsing) {
-              printBrowse($name, $id);
+              printBrowse($name, $id, $inMyStuff);
             } else if ($MealPlan_Id == NULL) {
               printReg($name);
             } else {
@@ -108,7 +125,7 @@
             }
           }
         } else {
-          echo "<tr><td>None</td></tr>";
+          echo "<tr><td colspan=\"100%\">None</td></tr>";
         }
       ?>
     </table>
