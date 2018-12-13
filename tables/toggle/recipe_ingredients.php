@@ -6,6 +6,10 @@ include("../../connection/dbConfig.php");
   $ingrName = $_REQUEST['iName'];
   $Recipe_Id = $_REQUEST['rID'];
 
+  if ($Recipe_Id == NULL) {
+    $Recipe_Id = $_REQUEST['rId'];
+  }
+
   $sql = "SELECT * FROM `Project_Database`.`RECIPE_CONTAINS`
           WHERE `Ingredient` = '$ingrName' AND `Recipe_Id` = '$Recipe_Id';";
   $find = $db->query($sql);
