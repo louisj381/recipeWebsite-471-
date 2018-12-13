@@ -27,7 +27,7 @@
         if (this.readyState == 4 && this.status == 200) {
           //var response = this.responseText;
           console.log(this.responseText);//shows all echos and prints from target php in the console!
-          //location.reload();
+          location.reload();
         }
       };
       xhttp.open("GET", "add/recipe.php?rId=" + recipe + "&req=" + Math.random());
@@ -38,7 +38,7 @@
     <table>
       <tr>
         <!-- <th style="width:auto;">ID</th> -->
-        <th>Recipe</th>
+        <th colspan="2">Recipe</th>
         <th>PrepTime</th>
         <!-- <th>CookTime</th> -->
         <th>Rating</th>
@@ -60,10 +60,20 @@
         $res = $db->query($sqlText);
         if ( $res->num_rows > 0 ) {
           //if sent here with meal info
-          //make array of all recipes in that meal
+
           $Meal_Id = $_GET['mId'];
           $browsing = $_GET['b'];
           $inMeal = array("");
+          $inMyStuff = array("");
+          //make array of all meals i dont have
+          if ( $browsing ) {
+            $sqlInMyStuff = "SELECT `Recipe_Id` FROM `Project_Database`.`USER_RECIPES` WHERE `User_Id` = '$uID';";
+            $inMyStuffResult = $db->query($sqlInMyStuff);
+            if ( $inMyStuffResult->num_rows > 0  ){
+              while ( $row = $inMyStuffResult->fetch_assoc() ) { array_push($inMyStuff, $row['Recipe_Id']); }
+            }
+          } else // ya this is supposed to be here
+          //make array of all recipes in that meal
           if ( $Meal_Id <> NULL ) {
             $sqlInMeal = "SELECT `MEAL_CONTAINS`.`Recipe_Id` FROM `Project_Database`.`MEAL_CONTAINS` WHERE `Meal_Id` = '$Meal_Id';";
             $inMealResult = $db->query($sqlInMeal);
@@ -105,10 +115,20 @@
                 <td>$ingredients</td>
                 </tr>";
             } else {
+              if ( $browsing ){
+                if (!in_array($id, $inMyStuff)) { //in is an array holding my meals
+                  $mine = '<img src="../icons/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
+                } else {
+                  $mine = '<img src="../icons/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
+                }//<td style=\"width:26px\">$mine</td>
+              } else $mine = '';
               $onClick = ($browsing)? "toggleUser($id)":"location.href = '../edit/recipe.php?rId=$id'";
+              $col = ($browsing)? '':'colspan="2"';
+              $extra = ($browsing)? "<td style=\"width:26px\">$mine</td>":"";
               echo "
               <tr onClick=\"$onClick\">
-                <td>$name</td>
+                $extra
+                <td $col>$name</td>
                 <td style=\"text-align:center;\">$prep Minutes</td>
                 <td style=\"text-align:center;\">$rating Stars</td>
                 <td>$instructions</td>
