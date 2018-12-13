@@ -63,7 +63,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['AddIngredient']))
   <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="info">
     <tr><td>Ingredient Name:</td><td><input type="text" name="ingrName" style="width:100%"></td></tr>
     <tr><td>Calories per Gram:</td><td><input type="number" name="calPgram" style="width:100%"></td></tr>
-    <!-- if recipe given -->
+    <!-- TODO if recipe given -->
     <tr><td>Quantity:</td><td><input type="number" name="quantity" style="width:100%"></td></tr>
     <tr><td>Unit:</td><td><input type="text" name="unit" style="width:100%"></td></tr>
   </form>

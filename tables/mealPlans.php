@@ -11,7 +11,8 @@
   <body>
     <table>
       <tr>
-        <th>Meal</th>
+        <th>Meal Plan</th>
+        <th># Meals</th>
       </tr>
       <!-- next rows -->
       <?php
@@ -26,10 +27,13 @@
         $res = $db->query($sqlText);
         if ( $res->num_rows > 0 ) {
           while ( $row = $res->fetch_assoc() ) {
-            $name = $row['Name'];
+            $name = ucwords($row['Name']);
+            $id = $row['MealPlan_Id'];
+            $nMeals = $row['NumberOfMeals'];
             echo "
-            <tr>
-             <td>$name</td>
+            <tr onClick=\"location.href = '../edit/mealPlan.php?mpId=$id'\">
+             <td style=\"width:85%\">$name</td>
+             <td style=\"width:15%\">$nMeals</td>
             </tr>";
           }
         } else {

@@ -42,14 +42,15 @@
 <html>
 <script javascript>
   function toggleInRecipe( recipe, ingredient ) {
-    var xhttp = new XMLHttpRequest();
+    var xhttp = new XMLHttpRequest(); //sends a message to server in background
     xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
+      if (this.readyState == 4 && this.status == 200) { //received response AND respons is ok (200)
         //var response = this.responseText;
-        console.log(this.responseText);
+        console.log(this.responseText); //prints echos and text output of target php is sent to console
         location.reload();
       }
     };
+    // req : request, prevents the browser fromcaching the page-> ensures server updates
     xhttp.open("GET", "toggle/recipe_ingredients.php?rID=" + recipe + "&req=" + Math.random() + "&iName=" + ingredient);
     xhttp.send();
   }
@@ -72,8 +73,12 @@
         $root = "../";
         include($root . "connection/dbConfig.php");  //to access db
         $uID = $_SESSION['user_id'];
-        //to get the ingredients for this user
-        $sqlText = "SELECT * FROM USER_INGREDIENTS WHERE User_Id =" . $uID .";";
+
+        if ($rId == NULL) {//to get the ingredients for this user
+          $sqlText = "SELECT * FROM USER_INGREDIENTS WHERE User_Id =" . $uID .";";
+        } else {  //all
+          $sqlText = "SELECT * FROM USER_INGREDIENTS;";
+        }
         $res = $db->query($sqlText);
 
         //copy the ingredients in the thing into an array to check later
