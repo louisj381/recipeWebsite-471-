@@ -17,6 +17,7 @@
       <p>&nbsp;</p>
       <button class="button" style="width:100%;" onClick="location.href = '../views/browse.php'">Browse</button>
       <button class="button" style="width:100%;" onClick="location.href = '../myStuff/cookbook.php'">Cookbook</button>
+      <button class="button" style="width:100%;" onClick="location.href = '../views/channels.php'">Channels</button>
       <button class="button" style="width:100%;" onClick="location.href = '../myStuff/pantry.php'">Pantry</button>
       <button class="button" style="width:100%;" onClick="location.href = '../myStuff/guestbook.php'">Guestbook</button>
       <button class="button" style="width:100%;" onClick="location.href = '../myStuff/account.php'">Account</button>
