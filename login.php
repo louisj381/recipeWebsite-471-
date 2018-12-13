@@ -25,6 +25,7 @@
 
         if($count == 1) {
            $_SESSION['user_id'] = $row['User_Id'];
+           $_SESSION['password'] = $mypassword;
            $_SESSION['Curator_Flag'] = $row['Curator_Flag'];
            if ( $_SESSION['Curator_Flag'] == 1 ) {
              header("location: views/curatorHomepage.php");
