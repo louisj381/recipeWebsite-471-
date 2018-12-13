@@ -21,6 +21,18 @@
       xhttp.open("GET", "toggle/meal_recipes.php?rId=" + recipe + "&req=" + Math.random() + "&mId=" + meal);
       xhttp.send();
     }
+    function toggleUser( recipe ) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //var response = this.responseText;
+          console.log(this.responseText);//shows all echos and prints from target php in the console!
+          //location.reload();
+        }
+      };
+      xhttp.open("GET", "add/recipe.php?rId=" + recipe + "&req=" + Math.random());
+      xhttp.send();
+    }
   </script>
   <body>
     <table>
@@ -50,6 +62,7 @@
           //if sent here with meal info
           //make array of all recipes in that meal
           $Meal_Id = $_GET['mId'];
+          $browsing = $_GET['b'];
           $inMeal = array("");
           if ( $Meal_Id <> NULL ) {
             $sqlInMeal = "SELECT `MEAL_CONTAINS`.`Recipe_Id` FROM `Project_Database`.`MEAL_CONTAINS` WHERE `Meal_Id` = '$Meal_Id';";
@@ -64,7 +77,6 @@
             $name = $row['Name'];
             $prep = $row['PrepTime'];
             #cooktime
-
             $rating = $row['Rating'];
             $instructions = $row['Instructions'];
             $ingredients = "";
@@ -93,8 +105,9 @@
                 <td>$ingredients</td>
                 </tr>";
             } else {
+              $onClick = ($browsing)? "toggleUser($id)":"location.href = '../edit/recipe.php?rId=$id'";
               echo "
-              <tr onClick=\"location.href = '../edit/recipe.php?rId=$id'\">
+              <tr onClick=\"$onClick\">
                 <td>$name</td>
                 <td style=\"text-align:center;\">$prep Minutes</td>
                 <td style=\"text-align:center;\">$rating Stars</td>

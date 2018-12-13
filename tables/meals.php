@@ -3,6 +3,32 @@
   session_start();
   //// TODO: make browse flag so peeps can add recipes/meals to their list easily
 
+  function printBrowse( $name, $id ) {
+    echo "
+    <tr onClick=\"toggleUser($id)\">
+      <td colspan=\"100%\">$name</td>
+    </tr>"; //maybe include tags in this
+  }
+
+  function printReg( $name ) {
+    echo "
+    <tr onClick=\"location.href = '../edit/meal.php?mId=$id'\">
+      <td colspan=\"100%\">$name</td>
+    </tr>"; //maybe include tags in this
+  }
+
+  function printToggle($name, $id, $inMealPlan, $MealPlan_Id) {
+    if (!in_array($id,$inMealPlan)) { //in is an array holding the meals contained in given mealplan
+      $style = '';
+    } else {
+      $style = 'background-color:rgba(0,0,0,0.6)';  //make included meals stand out
+    }
+    echo "
+    <tr style=\"$style\">
+      <td><button class=\"smallButton\" onClick=\"location.href = '../edit/meal.php?mId=$id&mpId=$MealPlan_Id'\">Edit</button></td>
+      <td onClick=\"toggleInMealPlan($id,$MealPlan_Id);\">$name</td>
+    </tr>"; //maybe include tags in this
+  }
  ?>
 
 <html>
@@ -23,6 +49,19 @@
       xhttp.open("GET", "toggle/mealPlan_meals.php?mpId=" + mealPlan + "&req=" + Math.random() + "&mId=" + meal);
       xhttp.send();
     }
+
+    function toggleUser( meal ) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          //var response = this.responseText;
+          console.log(this.responseText);//shows all echos and prints from target php in the console!
+          //location.reload();
+        }
+      };
+      xhttp.open("GET", "add/meal.php?mId=" + meal + "&req=" + Math.random());
+      xhttp.send();
+    }
   </script>
   <body>
     <table>
@@ -37,11 +76,14 @@
         //echo $uID;
         $MealPlan_Id = $_GET['mpId'];
         $sqlText = $_SESSION['sqlBrowseMeal'];
+        $browsing = $_GET['b'];
+
         if (empty($_SESSION['sqlBrowseMeal'])) {
           $sqlText = "SELECT * FROM `Project_Database`.`MEAL`;" ;
         }
+
         $res = $db->query($sqlText);
-        //echo $db->error;
+
         if ( $res->num_rows > 0 ) {
           //make array of all recipes in that meal
           $inMealPlan = array("");
@@ -57,22 +99,12 @@
           while ( $row = $res->fetch_assoc() ) {
             $name = $row['Meal_type'];
             $id = $row['Meal_Id'];
-            if ($MealPlan_Id == NULL) {
-              echo "
-              <tr onClick=\"location.href = '../edit/meal.php?mId=$id'\">
-                <td colspan=\"100%\">$name</td>
-              </tr>"; //maybe include tags in this
+            if ($browsing) {
+              printBrowse($name, $id);
+            } else if ($MealPlan_Id == NULL) {
+              printReg($name);
             } else {
-              if (!in_array($id,$inMealPlan)) { //in is an array holding the meals contained in given mealplan
-                $style = '';
-              } else {
-                $style = 'background-color:rgba(0,0,0,0.6)';  //make included meals stand out
-              }
-              echo "
-              <tr style=\"$style\">
-                <td><button class=\"smallButton\" onClick=\"location.href = '../edit/meal.php?mId=$id&mpId=$MealPlan_Id'\">Edit</button></td>
-                <td onClick=\"toggleInMealPlan($id,$MealPlan_Id);\">$name</td>
-              </tr>"; //maybe include tags in this
+              printToggle($name, $id, $inMealPlan, $MealPlan_Id);
             }
           }
         } else {

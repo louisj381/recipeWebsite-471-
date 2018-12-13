@@ -11,10 +11,10 @@ if ($_SESSION['Curator_Flag'] == 1)
 if( isset($_POST['btnbrowse'] )) {
  $browse = $_POST['browse'];
  //echo $browse;
- $sqlrecipe = "SELECT * FROM Project_Database.RECIPE WHERE RECIPE_ID IN (SELECT Recipe_Id FROM Project_Database.RECIPE_TAGS WHERE Tag LIKE '%". $browse ."%');" ;
+ $sqlrecipe = "SELECT * FROM Project_Database.RECIPE WHERE RECIPE_ID IN (SELECT Recipe_Id FROM Project_Database.RECIPE_TAGS WHERE Tag LIKE '%". $browse ."%') OR `Name` LIKE '%". $browse ."%';" ;
 //echo '<input type="hidden" name="sqlRecipe" value="' . $sqlrecipe . '">';
 $_SESSION['sqlBrowseRecipe'] = $sqlrecipe;
-$sqlmeal = "SELECT * FROM Project_Database.MEAL WHERE Meal_Id IN (SELECT Meal_Id FROM Project_Database.MEAL_TAGS WHERE Tags LIKE '%". $browse ."%');" ;
+$sqlmeal = "SELECT * FROM Project_Database.MEAL WHERE Meal_Id IN (SELECT Meal_Id FROM Project_Database.MEAL_TAGS WHERE Tags LIKE '%". $browse ."%') OR `Meal_type` LIKE '%". $browse ."%';" ;
 //echo '<input type="hidden" name="sqlRecipe" value="' . $sqlrecipe . '">';
 $_SESSION['sqlBrowseMeal'] = $sqlmeal;
 $sqlmealPlan = "SELECT * FROM Project_Database.MEAL_PLAN WHERE Name LIKE '%". $browse ."%';" ;
@@ -57,9 +57,11 @@ $_SESSION['sqlMealPlan'] = $sqlmealPlan;
     </form>
     <body>
       <h3> Recipes: </h3>
-      <iframe src="../tables/recipes.php" style="width:100%;height:30%;"></iframe><br><br>
+      <iframe src="../tables/recipes.php?b=true" style="width:100%;height:30%;"></iframe><br><br>
       <h3> Meals: </h3>
-      <iframe src="../tables/meals.php" style="width:100%;height:30%;"></iframe></body>
+      <iframe src="../tables/meals.php?b=true" style="width:100%;height:30%;"></iframe></body>
+      <h3> Meal Plans: </h3>
+      <iframe src="../tables/mealPlans.php?b=true" style="width:100%;height:30%;"></iframe></body>
     <form action=<?php echo $homepage?> method="post" id="back"></form>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="refresh"></form>
