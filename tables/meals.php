@@ -1,21 +1,8 @@
 <?php
   ob_start();
   session_start();
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO: add meals to database, make browse flag so peeps can add recipes/meals to their list easily
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO:
-  //// TODO:
+  //// TODO: make browse flag so peeps can add recipes/meals to their list easily
+
  ?>
 
 <html>
@@ -52,15 +39,21 @@
         $sqlText = $_SESSION['sqlBrowseMeal'];
         if (empty($_SESSION['sqlBrowseMeal'])) {
           $sqlText = "SELECT * FROM `Project_Database`.`MEAL`;" ;
-          //echo "<tr><td colspan=\"100%\">None</td></tr>";
-          //return;
         }
-        //$sqlText = "SELECT * FROM `Project_Database`.`MEAL`;" ;
-        //echo $sqlText;
-        //echo $MealPlan_Id;
         $res = $db->query($sqlText);
         //echo $db->error;
         if ( $res->num_rows > 0 ) {
+          //make array of all recipes in that meal
+          $inMealPlan = array("");
+          if ( $MealPlan_Id <> NULL ) {
+            $sqlInMealPlan = "SELECT `MEAL_PLAN_CONTAINS`.`Meal_Id` FROM `Project_Database`.`MEAL_PLAN_CONTAINS` WHERE `MealPlan_Id` = '$MealPlan_Id';";
+            $inMealPlanResult = $db->query($sqlInMealPlan);
+            if ( $inMealPlanResult->num_rows > 0  ){
+              while ( $row = $inMealPlanResult->fetch_assoc() ) { array_push($inMealPlan, $row['Meal_Id']); }
+            }
+          }
+          //end of that part
+
           while ( $row = $res->fetch_assoc() ) {
             $name = $row['Meal_type'];
             $id = $row['Meal_Id'];
@@ -70,8 +63,13 @@
                 <td colspan=\"100%\">$name</td>
               </tr>"; //maybe include tags in this
             } else {
+              if (!in_array($id,$inMealPlan)) { //in is an array holding the meals contained in given mealplan
+                $style = '';
+              } else {
+                $style = 'background-color:rgba(0,0,0,0.6)';  //make included meals stand out
+              }
               echo "
-              <tr>
+              <tr style=\"$style\">
                 <td><button class=\"smallButton\" onClick=\"location.href = '../edit/meal.php?mId=$id&mpId=$MealPlan_Id'\">Edit</button></td>
                 <td onClick=\"toggleInMealPlan($id,$MealPlan_Id);\">$name</td>
               </tr>"; //maybe include tags in this

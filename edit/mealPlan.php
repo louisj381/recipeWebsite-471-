@@ -82,6 +82,7 @@ include("../connection/dbConfig.php");
     <tr><td>MealPlan Name:</td><td><input type="text" name="mpName" style="width:100%" value="<?= $mpName?>"></td></tr>
     <tr><td># Meals:</td><td><input type="text" name="nMeals" style="width:100%" value="<?= $nMeals?>"></td></tr>
     <tr><td>Creator:</td><td><input type="text" name="creator" style="width:100%" value="<?= $creator?>"></td></tr>
+    <!-- TODO time and stuff-->
   </form>
   <form action="../tables/mealPlans.php" method="post" id="back"></form>
   <tr>
