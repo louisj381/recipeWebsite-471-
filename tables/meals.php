@@ -16,7 +16,7 @@
     </tr>"; //maybe include tags in this
   }
 
-  function printReg( $name ) {
+  function printReg( $name , $id) {
     echo "
     <tr onClick=\"location.href = '../edit/meal.php?mId=$id'\">
       <td colspan=\"100%\">$name</td>
@@ -118,7 +118,7 @@
             if ($browsing) {
               printBrowse($name, $id, $inMyStuff);
             } else if ($MealPlan_Id == NULL) {
-              printReg($name);
+              printReg($name, $id);
             } else {
               printToggle($name, $id, $inMealPlan, $MealPlan_Id);
             }

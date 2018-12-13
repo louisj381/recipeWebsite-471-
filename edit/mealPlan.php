@@ -33,7 +33,19 @@ include("../connection/dbConfig.php");
   $creator = $cRow['Screen_Name'];
 
   $valid_input = ( !empty($_POST['mpName']) );
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['delete']) {
+    //echo "<script javascript>confirmExit( '$result' )</script>";
+    $sql = "DELETE FROM `Project_Database`.`USER_MEAL_PLANS`
+            WHERE `MealPlan_Id` = '$MealPlan_Id' ;";
+    $success = $db->query($sql);
 
+    if ($success === TRUE) {
+      $result = "Successful Saving Changes";
+      header('location: ../tables/mealPlans.php');
+    } else {
+      $result = "Unsuccessful Saving Changes";
+    }
+  } else
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $valid_input && $_POST['saveEdits']) {
     $mpName = text_input($_POST['mpName']);
     $sql = "UPDATE `Project_Database`.`MEAL_PLAN`
@@ -87,7 +99,9 @@ include("../connection/dbConfig.php");
   <form action="../tables/mealPlans.php" method="post" id="back"></form>
   <tr>
     <td><button class="button" style="width:100%" type="submit" name="saveEdits" value="TRUE" form="info">Save</button></td>
-    <td><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
+    <td><button class="button" style="width:100%" type="submit" name="delete" value="TRUE" form="info">Delete</button></td>
+  </tr><tr>
+    <td colspan="100%"><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
   </tr>
   </table>
   <iframe src="../tables/meals.php?mpId=<?= $MealPlan_Id?>" style="width:100%;height:40%;" allowTransparency="true"></iframe>

@@ -47,7 +47,19 @@ include("../connection/dbConfig.php");
   // }
 
   $valid_input = ( !empty($_POST['rName']) && !empty($_POST['rPrep']) && !empty($_POST['rCook']) && !empty($_POST['rInstr']) );
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['delete']) {
+    //echo "<script javascript>confirmExit( '$result' )</script>";
+    $sql = "DELETE FROM `Project_Database`.`USER_RECIPES`
+            WHERE `Recipe_Id` = '$Recipe_Id' ;";
+    $success = $db->query($sql);
 
+    if ($success === TRUE) {
+      $result = "Successful Saving Changes";
+      header('location: ../tables/recipes.php');
+    } else {
+      $result = "Unsuccessful Saving Changes: " . $db->error;
+    }
+  } else
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $valid_input && $_POST['saveEdits']) {
     $rName = text_input($_POST['rName']);
     $rPrep = $_POST['rPrep'];
@@ -118,7 +130,9 @@ include("../connection/dbConfig.php");
   <form action="../tables/recipes.php" method="post" id="back"></form>
   <tr>
     <td><button class="button" style="width:100%" type="submit" name="saveEdits" value="TRUE" form="info">Save</button></td>
-    <td><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
+    <td><button class="button" style="width:100%" type="submit" name="delete" value="TRUE" form="info">Delete</button></td>
+  </tr><tr>
+    <td colspan="100%"><button class="button" style="width:100%" type="submit" name="Back" value="Back" form="back">Go Back</button></td>
   </tr>
   </table>
   <iframe src="../tables/ingredients.php?rId=<?echo $Recipe_Id?>" style="width:100%;height:40%;" allowTransparency="true"></iframe>
