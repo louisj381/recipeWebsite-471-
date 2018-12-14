@@ -18,23 +18,26 @@ if( $_POST['btnsubmit'] === "TRUE" ) {
   $sql = "SELECT * FROM END_USER WHERE Email_Address ='" . $e . "';";
   $result = mysqli_query($db,$sql);
   $count = mysqli_num_rows($result);
-  if($e==NULL || $p==NULL || $u==NULL|| $f==NULL || $la==NULL)
+  if ($e==NULL || $p==NULL || $u==NULL|| $f==NULL || $la==NULL)
   {
       $error = "Some fields have been left blank";
       echo "<script type = 'text/javascript'>alert('$error');</script>";
   }
-  else if($count>0)
+  else if ($count>0)
   {
     $error = "That email has already been used please try again";
     echo "<script type = 'text/javascript'>alert('$error');</script>";
   }
-  else{
+  else {
     $sql = "INSERT INTO Project_Database.END_USER (`Email_Address`, `Screen_Name`, `Hashed_Password`, `Curator_Flag`) VALUES('". $e . "', '". $u . "', SHA2('" . $p ."',256),'0');";
     $success1 = mysqli_query($db,$sql);
     $last_id = $db->insert_id;
     $sql = "INSERT INTO Project_Database.STD_USER (`User_Id`,`First_Name`, `Last_Name`, `Num_Allergies`) VALUES('". $last_id ."','" . $f . "', '". $la ."', 0);";
     $success2 = mysqli_query($db,$sql);
-    if (!$success1 || !$success2){
+
+    $sql = "INSERT INTO Project_Database.DEPENDANTS (`User_Id`, `Name`, `Relationship`, `No-of_allergies`) VALUES('". $last_id ."','Me', 'Self', 0);";
+    $success3 = mysqli_query($db,$sql);
+    if (!$success1 || !$success2 || !$success3){
       $error = "oops! " . $db->error;
     } else {
       $error = "Account created!";//Go to Login

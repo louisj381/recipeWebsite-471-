@@ -22,6 +22,10 @@
       $notMine = "checked";
       $mine = $all = "unchecked";
       break;
+    default:
+      $all = "checked";
+      $mine = $notMine = "unchecked";
+      break;
   }
 
   if( isset($_POST['btnbrowse'] )) {
@@ -38,6 +42,10 @@
     $append = appendMine("MealPlan_Id", "USER_MEAL_PLANS");
     $sqlmealPlan = "SELECT * FROM `Project_Database`.`MEAL_PLAN` WHERE (`Name` LIKE '%". $browse ."%') $append;" ;
     $_SESSION['sqlMealPlan'] = $sqlmealPlan;
+
+    $append = appendMine("Channel", "SUBSCRIPTIONS");
+    $sqlmealPlan = "SELECT * FROM `Project_Database`.`CHANNEL` WHERE (`Name` IN (SELECT `Name` FROM `Project_Database`.`CHANNEL_TAGS` WHERE `Tags` LIKE '%". $browse ."%') OR `Name` LIKE '%". $browse ."%') $append;" ;
+    $_SESSION['sqlChannels'] = $sqlmealPlan;
   }
   function appendMine($id_type, $user_table) {
     $uID = $_SESSION['user_id'];
@@ -46,7 +54,8 @@
     } else {
       $mine = $_POST['mine']=='true';
       $not = ($mine)?"":" NOT";
-      return " AND `$id_type`$not IN (SELECT `$id_type` FROM `Project_Database`.`$user_table` WHERE `User_Id` = '$uID')";
+      $find = ($id_type=="Channel")? "Name" : $id_type;
+      return " AND `$find`$not IN (SELECT `$id_type` FROM `Project_Database`.`$user_table` WHERE `User_Id` = '$uID')";
     }
   }
   function appendSafeRecipes($uID) {
@@ -70,7 +79,7 @@
       <style>
       /* extra stuff keenan would be proud of maybe <- yes I'm proud */
         input[name=browse] {
-          background-image: url("../icons/search.png");
+          background-image: url("../svg/search.svg");
           background-position: left;
           background-size: contain;
           background-repeat: no-repeat;
@@ -92,16 +101,16 @@
       </table>
       <table style="width:100%">
         <tr>
-          <td style="width:10%;">Show: </td>
-          <td style="width:2%;"><input type="radio" name="mine" value="all" title="Show all" <?=$all?>></td>
-          <td style="width:10%;"> All </td>
-          <td style="width:2%;"><input type="radio" name="mine" value="true" title="Only show things I have saved" <?=$mine?>></td>
-          <td style="width:10%;"> My Stuff </td>
-          <td style="width:2%;"><input type="radio" name="mine" value="false" title="Only show things I don't have saved" <?=$notMine?>></td>
-          <td style="width:10%;"> Not My Stuff </td>
+          <td style="width:10%;min-width:65px;">Show: </td>
+          <td style="width:2%;min-width:32px;"><input type="radio" name="mine" value="all" title="Show all" <?=$all?>></td>
+          <td style="width:10%;min-width:65px;"> All </td>
+          <td style="width:2%;min-width:32px;"><input type="radio" name="mine" value="true" title="Only show things I have saved" <?=$mine?>></td>
+          <td style="width:10%;min-width:80px;"> My Stuff </td>
+          <td style="width:2%;min-width:32px;"><input type="radio" name="mine" value="false" title="Only show things I don't have saved" <?=$notMine?>></td>
+          <td style="width:10%;min-width:100px;"> Not My Stuff </td>
           <td style="width:10%;">&nbsp;</td>
-          <td style="width:2%;border-left:2px solid #F0F8FF;"><input type="checkbox" name="safe" value="true" title="Only show recipes that I am not allergic to" <?=($_POST['safe'])? "checked":"unchecked"?>></td>
-          <td style="width:10%;"> Safe </td>
+          <td style="width:2%;min-width:32px;border-left:2px solid #F0F8FF;"><input type="checkbox" name="safe" value="true" title="Only show recipes that I am not allergic to" <?=($_POST['safe'])? "checked":"unchecked"?>></td>
+          <td style="width:10%;min-width:65px;"> Safe </td>
           <td style="width:32%;">&nbsp;</td>
         </tr>
       </table>
@@ -109,11 +118,13 @@
     </form>
     <body>
       <h3> Recipes: </h3>
-      <iframe src="../tables/recipes.php?b=true" style="width:100%;height:30%;"></iframe><br><br>
+      <iframe src="../tables/recipes.php?b=true" style="width:100%;height:40%;"></iframe><br><br>
       <h3> Meals: </h3>
-      <iframe src="../tables/meals.php?b=true" style="width:100%;height:30%;"></iframe></body>
+      <iframe src="../tables/meals.php?b=true" style="width:100%;height:40%;"></iframe></body>
       <h3> Meal Plans: </h3>
-      <iframe src="../tables/mealPlans.php?b=true" style="width:100%;height:30%;"></iframe></body>
+      <iframe src="../tables/mealPlans.php?b=true" style="width:100%;height:40%;"></iframe></body>
+      <h3> Channels: </h3>
+      <iframe src="../tables/channels.php?b=true" style="width:100%;height:40%;"></iframe></body>
     <form action=<?php echo $homepage?> method="post" id="back"></form>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="refresh"></form>
