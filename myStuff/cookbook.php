@@ -17,7 +17,6 @@
   <!-- <h2> Recipes: </h2> -->
   <body>
     <button class="button" style="width:100%;" onClick="location.href = '../views/browse.php'">Add to My Cookbook</button>
-    <button class="button" style="width:100%;" onClick="location.href = './pantry.php'">View My Pantry</button>
     <button class="button" style="width:100%;" onClick="location.href = '../views/recipes.php'">View My Recipes</button>
     <button class="button" style="width:100%;" onClick="location.href = '../views/meals.php'">View My Meals</button>
     <button class="button" style="width:100%;" onClick="location.href = '../views/mealPlans.php'">View My Meal Plans</button>
