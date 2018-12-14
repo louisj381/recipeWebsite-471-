@@ -76,7 +76,10 @@ include("../connection/dbConfig.php");
   </table>
   <table style="width:100%">
   <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?d=$dName";?> method="post" id="info">
-    <tr><td>Relationship:</td><td><input type="text" name="relation" style="width:100%" value="<?=$relation?>"></td></tr>
+    <?php if ($dName != "Me") {
+            echo "<tr><td>Relationship:</td><td><input type=\"text\" name=\"relation\" style=\"width:100%\" value='$relation'></td></tr>";
+          }?>
+    <!-- <tr><td>Relationship:</td><td><input type="text" name="relation" style="width:100%" value="<?=$relation?>"></td></tr> -->
   </form>
   <form action="../tables/dependants.php" method="post" id="back"></form>
   <form action="addAllergy.php?d=<?=$dName?>" method="post" id="algy"></form>
