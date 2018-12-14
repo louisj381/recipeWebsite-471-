@@ -35,11 +35,12 @@
         $uID = $_SESSION['user_id'];
         $sqlText = $_SESSION['sqlMealPlan'];
         $browsing = $_GET['b'];
+        $cId = $_GET['cId'];
 
         if (empty($_SESSION['sqlMealPlan'])) {
           $sqlText = "SELECT * FROM `Project_Database`.`MEAL_PLAN`;";
         }
-
+        //echo $sqlText;
         $res = $db->query($sqlText);
         if ( $res->num_rows > 0 ) {
           $inMyStuff = array("");
@@ -59,9 +60,9 @@
             $nMeals = $row['NumberOfMeals'];
             if ( $browsing ){
               if (!in_array($id, $inMyStuff)) { //in is an array holding my meals
-                $mine = '<img src="../icons/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
+                $mine = '<img src="../resources/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
               } else {
-                $mine = '<img src="../icons/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
+                $mine = '<img src="../resources/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
               }//<td style=\"width:26px\">$mine</td>
               echo "
               <tr onClick=\"toggleUser($id)\">

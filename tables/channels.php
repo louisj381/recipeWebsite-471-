@@ -62,9 +62,9 @@
             @$subscribers = mysqli_num_rows($result);
             if ( $browsing ){
               if (!in_array($channel, $inMyStuff)) { //in is an array holding my meals
-                $mine = '<img src="../icons/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
+                $mine = '<img src="../resources/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
               } else {
-                $mine = '<img src="../icons/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
+                $mine = '<img src="../resources/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
               }//<td style=\"width:26px\">$mine</td>
               echo "
               <tr onClick=\"toggleUser('$channel')\">
