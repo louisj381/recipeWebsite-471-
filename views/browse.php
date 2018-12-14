@@ -22,6 +22,10 @@
       $notMine = "checked";
       $mine = $all = "unchecked";
       break;
+    default:
+      $all = "checked";
+      $mine = $notMine = "unchecked";
+      break;
   }
 
   if( isset($_POST['btnbrowse'] )) {
@@ -41,7 +45,7 @@
 
     $append = appendMine("Channel", "SUBSCRIPTIONS");
     $sqlmealPlan = "SELECT * FROM `Project_Database`.`CHANNEL` WHERE (`Name` IN (SELECT `Name` FROM `Project_Database`.`CHANNEL_TAGS` WHERE `Tags` LIKE '%". $browse ."%') OR `Name` LIKE '%". $browse ."%') $append;" ;
-    $_SESSION['sqlMealPlan'] = $sqlmealPlan;
+    $_SESSION['sqlChannels'] = $sqlmealPlan;
   }
   function appendMine($id_type, $user_table) {
     $uID = $_SESSION['user_id'];
@@ -75,7 +79,7 @@
       <style>
       /* extra stuff keenan would be proud of maybe <- yes I'm proud */
         input[name=browse] {
-          background-image: url("../icons/search.png");
+          background-image: url("../svg/search.svg");
           background-position: left;
           background-size: contain;
           background-repeat: no-repeat;

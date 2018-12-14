@@ -56,7 +56,7 @@ include("../connection/dbConfig.php");
   <table style="width:100%">
     <tr><td colspan="2"><h1 style="font-size:30pt;margin-bottom:0px;"><?= ucwords($channelName)?></h1></td>
     <td><?php echo "<p>$result</p>";?></td></tr>
-    <tr><td style="width:34px;"><img src="../icons/user.png" alt="creator:" style="width:32px;height:32px;border:0"></td>
+    <tr><td style="width:34px;"><img src="../resources/user.png" alt="creator:" style="width:32px;height:32px;border:0"></td>
       <td colspan="2"><h1 style="font-size:16pt;margin-bottom:0px;"><?= ucwords($creator)?></h1></td></tr>
   </table>
   <iframe src="../tables/mealPlans.php?b=true" style="width:100%;height:40%;" allowTransparency="true"></iframe>
