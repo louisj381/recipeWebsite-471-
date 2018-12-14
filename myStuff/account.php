@@ -35,7 +35,6 @@
   $end = $db->query($sql_end);
   $std = $db->query($sql_std);
   $cur = $db->query($sql_cur);
-
   if ( $end->num_rows > 0 ) { //yay user exists
       $row = $end->fetch_assoc();
       $screen_name = $row['Screen_Name'];
@@ -48,9 +47,9 @@
         $num_allergies = $row['Num_Allergies'];
         $showSTD = true;
       } elseif ($curFlag && $cur->num_rows > 0 ) {  //curator
-        $row = $std->fetch_assoc();
+        $row = $cur->fetch_assoc();
         $credit = $row['Credit_Card'];
-        $expDay = $row['Exp_Date']; // <- idk how to do a date rn
+        $expDay = $row['Exp_Date'];
         $cvv = $row['Sec_Num'];
         $showCUR = true;
       } else {
@@ -121,9 +120,9 @@
     }
     if ($showCUR) {
       echo '
-          <tr><td>Credit Card: <input type="text" name="new_cc" value="' . $credit . '" style="width:100%;"></td></tr>
-          <tr><td>Expiry Date: <input type="date" name="new_exp" value="' . $expDay . '" style="width:100%;"></td></tr>
-          <tr><td>Securiy Num: <input type="date" name="new_sec" style="width:100%;"></td></tr>
+          <tr><td>Credit Card: </td><td><input type="text" name="new_cc" value="' . $credit . '" style="width:100%;"></td></tr>
+          <tr><td>Expiry Date: </td><td><input type="text" name="new_exp" value="' . $expDay . '" style="width:100%;"></td></tr>
+          <tr><td>Securiy Num: </td><td><input type="text" name="new_sec" value="' . $cvv . '" style="width:100%;"></td></tr>
       ';
     }
    ?>
