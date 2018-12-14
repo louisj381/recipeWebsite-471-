@@ -28,7 +28,7 @@
       break;
   }
 
-  if( isset($_POST['btnbrowse'] )) {
+  //if( isset($_POST['btnbrowse'] )) {
     $browse = $_POST['browse'];
 
     $append = appendMine("Recipe_Id", "USER_RECIPES") . appendSafeRecipes($_SESSION['user_id']);
@@ -46,7 +46,7 @@
     $append = appendMine("Channel", "SUBSCRIPTIONS");
     $sqlmealPlan = "SELECT * FROM `Project_Database`.`CHANNEL` WHERE (`Name` IN (SELECT `Name` FROM `Project_Database`.`CHANNEL_TAGS` WHERE `Tags` LIKE '%". $browse ."%') OR `Name` LIKE '%". $browse ."%') $append;" ;
     $_SESSION['sqlChannels'] = $sqlmealPlan;
-  }
+  //}
   function appendMine($id_type, $user_table) {
     $uID = $_SESSION['user_id'];
     if ($_POST['mine'] == 'all') {
@@ -95,7 +95,7 @@
       <table style="width:100%;">
         <tr>
           <td style="width:10%;">Search:</td>
-          <td style="width:85%;"><input type="text" name="browse" style="width:100%;" placeholder="Search..."></td>
+          <td style="width:85%;"><input type="text" name="browse" style="width:100%;" placeholder="Search..." <?=($browse==NULL)?"":"value=\"$browse\""?>></td>
           <td style="width:5%;"><button class="button" type = "submit" name = "btnbrowse" value = "Search">Go!</button></td>
         </tr>
       </table>
