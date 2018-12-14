@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `CURATOR`;
 CREATE TABLE `CURATOR` (
   `User_Id` int(11) NOT NULL,
   `Credit_Card` int(19) DEFAULT NULL,
-  `Exp_Date` date DEFAULT NULL,
+  `Exp_Date` varchar(10) DEFAULT NULL,
   `Sec_Num` int(3) DEFAULT NULL,
   PRIMARY KEY (`User_Id`),
   UNIQUE KEY `User_Id_UNIQUE` (`User_Id`),
