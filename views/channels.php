@@ -15,7 +15,7 @@
  <div class="center" style="width:80%;">
    <h1> Channels </h1>
    <body>
-     <iframe src="../tables/channels.php" style="width:100%;"></iframe>
+     <iframe src="../tables/channels.php?mine=true" style="width:100%;height:60%;"></iframe>
      <form action="../creationForms/data/addMealPlan.php" method="post" id="mealPlan"></form>
      <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="refresh"></form>
      <form action="../views/standardHomepage.php" method="post" id="back"></form>

@@ -36,7 +36,7 @@
             </tr>";
           }
         } else {
-          echo "<tr><td>None</td><td></td></tr>";
+          echo "<tr><td colspan=\"100%\">None</td></tr>";
         }
       ?>
     </table>
