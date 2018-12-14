@@ -19,11 +19,6 @@ include("../connection/dbConfig.php");
   //get out of here if no work
   if (mysqli_num_rows($res) == 0) {
     echo "<script type='text/javascript'>alert('oops!\n$db->error');</script>";
-    // if (empty($_GET)) {
-    //   header("location: ../views/recipes.php");
-    // } else {
-    //   header("location: ../../views/recipes.php");
-    // }
     header("location: $back");
     //return;
   } else {
@@ -33,19 +28,6 @@ include("../connection/dbConfig.php");
     $rRate = $recipe['Rating'];
     $rInstr = $recipe['Instructions'];
   }
-
-  //TODO: implement selectable-ingredient table within iframe, to select and edit <- I did that
-
-  // $sql = "SELECT * FROM `Project_Database`.`RECIPE_CONTAINS` WHERE RECIPE_ID = '$Recipe_Id';";
-  // $qur = $db->query($sql);
-  // if ( $qur->num_rows > 0 ) {
-  //   if ($row = $qur->fetch_assoc()) //add the first one
-  //     $ingredients = $ingredients . $row['Ingredient'];
-  //   while ( $row = $qur->fetch_assoc() ) {
-  //     $ingredients = $ingredients . ", " . $row['Ingredient'];
-  //   }
-  // }
-
   $valid_input = ( !empty($_POST['rName']) && !empty($_POST['rPrep']) && !empty($_POST['rCook']) && !empty($_POST['rInstr']) );
   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['delete']) {
     //echo "<script javascript>confirmExit( '$result' )</script>";

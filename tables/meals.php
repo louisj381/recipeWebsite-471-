@@ -5,9 +5,9 @@
 
   function printBrowse( $name, $id, $inMyStuff ) {
     if (!in_array($id, $inMyStuff)) { //in is an array holding my meals
-      $mine = '<img src="../icons/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
+      $mine = '<img src="../resources/notMine_light.png" alt=" " style="width:24px;height:24px;border:0">';
     } else {
-      $mine = '<img src="../icons/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
+      $mine = '<img src="../resources/mine_light.png" alt="X" style="width:24px;height:24px;border:0">';  //make my meals stand out
     }
     echo "
     <tr onClick=\"toggleUser($id)\">
@@ -62,7 +62,7 @@
         if (this.readyState == 4 && this.status == 200) {
           //var response = this.responseText;
           console.log(this.responseText);//shows all echos and prints from target php in the console!
-          //location.reload();
+          location.reload();
         }
       };
       xhttp.open("GET", "add/meal.php?mId=" + meal + "&req=" + Math.random());

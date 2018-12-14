@@ -9,12 +9,16 @@
   $row = $res->fetch_assoc();
   $channelName = $row['Name'];
   $_SESSION['channel'] = $channelName;
+
   $sqlText = "SELECT * FROM `Project_Database`.`SUBSCRIPTIONS` WHERE `Channel` = '$channelName';";
   @$result = mysqli_query($db,$sqlText);
   @$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
   @$subs = mysqli_num_rows($result);
   if ($subs < 1)
     $subs = 0;
+
+  $sql = "SELECT * FROM `Project_Database`.`MEAL_PLAN` WHERE `MealPlan_Id` IN (SELECT `MealPlanId` FROM `Project_Database`.`CHANNEL_CONTAINS` WHERE `ChannelName` = '$channelName');";
+  $_SESSION['sqlMealPlan'] = $sql;
  ?>
  <html>
    <head>
@@ -29,7 +33,7 @@
    <h1> <? echo $channelName; ?> </h1>
    <h3> <? echo "Subscribers: " . $subs; ?> </h3>
    <body>
-     <iframe src="../tables/mealPlans.php" style="width:100%;"></iframe>
+     <iframe src="../tables/mealPlans.php?cId=<?=$channelName?>" style="width:100%;height:70%;"></iframe>
      <form action="../creationForms/data/addMealPlan.php" method="post" id="mealPlan"></form>
      <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="refresh"></form>
      <form action="../views/curatorHomepage.php" method="post" id="back"></form>
