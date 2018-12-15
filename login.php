@@ -53,10 +53,10 @@
     <div style="height:40%;">
       <form action="" method="post" id="loginForm" style="width:100%;">
         <table style="width:100%;">
-          <tr><td>Username:</td><td>
-          <input type="text" name="username" value="paidUser" class="column" style="width:100%;"></td></tr>
-          <tr><td>Password:</td><td>
-          <input type="password" name="password" value="1234" class="column" style="width:100%;"></td></tr>
+          <tr><td colspan="100%">
+          <input type="text" name="username" placeholder="Username..." class="column" style="width:100%;"></td></tr>
+          <tr><td colspan="100%">
+          <input type="password" name="password" placeholder="Password..." class="column" style="width:100%;"></td></tr>
         </table>
       </form>
     </div>
