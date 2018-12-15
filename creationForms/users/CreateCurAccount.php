@@ -36,9 +36,9 @@ if( $_POST['btnsubmit'] === "TRUE" ) {
    $sql = "INSERT INTO Project_Database.CURATOR (`User_Id`,`Credit_Card`, `Exp_Date`, `Sec_Num`) VALUES('". $last_id ."','" . $cc . "', '". $ex ."','". $sec ."');";
    $success2 = mysqli_query($db,$sql);
    if ($success1 && $success2){
-     $error = "oops! " . $db->error;
-   } else {
      $error = "Account created!";//Go to Login
+   } else {
+     $error = "oops! " . $db->error;
    }
    echo "<script type = 'text/javascript'>alert('$error');location.href = '../../login.php'</script>";
  }
