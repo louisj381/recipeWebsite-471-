@@ -1,0 +1,126 @@
+@@font-face {
+  font-family: main;
+  src:
+    avenir,
+    "Arial Black";
+
+}
+html {
+  background-color: #33334D; /* dark */
+}
+body {
+        background-color: transparent;/*#33334D; /* dark */
+        /*background-image:url('../photos/0Q4A2361.png');*/
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        color: #F0F8FF; /* light */
+        font-family:avenir;
+        font-size: 16;
+}
+h1 {
+        color: #F0F8FF;/* light */
+        font-family:avenir;
+        font-size: 24;
+}
+p {
+        color: #F0F8FF;/* light */
+        font-family:avenir;
+        font-size: 16;
+        font-variant: italic;
+        font-weight: lighter;
+}
+hr {
+  border-style: solid;
+  border-width: 4px;
+}
+iframe {
+  border: 0;
+  background-color: transparent;
+}
+input {/* input[type=text] */
+  background-color: #F0F8FF;/* light */
+  border: 2px solid #33334D; /* dark */
+  width:100%;
+  color: #33334D; /* dark */
+  padding: 5px 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: avenir;
+  border-radius: 5px;
+  margin: 5px 5px;
+  /* border: 2px solid #F0F8FF;/* light */
+}
+input[type=text].break {
+    word-wrap: break-word;
+    word-break: break-all;
+    height: 80px;
+}
+.textinput {
+  background-color: #F0F8FF;/* light */
+  border: 2px solid #33334D; /* dark */
+  width:100%;
+  color: #33334D; /* dark */
+  padding: 5px 15px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: avenir;
+  border-radius: 5px;
+  margin: 5px 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.div {
+  margin: 5px 5px;
+  /*padding: 5px 15px;*/
+}
+.column {
+    float: left;
+    width: 50%;
+}
+.column4 {
+    float: left;
+    width: 25%;
+}
+.center {
+  margin: auto;
+  padding: 10px;
+}
+.button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+
+  background-color: #F0F8FF;/* light */
+  border: none;
+  color: #33334D; /* dark */
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: avenir;
+  border-radius: 5px;
+  margin: 5px 5px;
+  border: 2px solid #F0F8FF;/* light */
+}
+.button:hover {
+  background-color: #c1e2ff;/* darker light */
+  border: 2px solid #F0F8FF;/* light */
+  color: #33334D; /* dark */
+}
+
+#reg {
+    font-family: avenir;
+}
+#fancyCode {
+    margin-left:5em;
+    margin-right:5em;
+    background:rgba(211, 211, 211, 0.55);
+    color:black;
+}
+#errorMessage {
+  font-family: monospace;
+  color:red;
+}
