@@ -84,7 +84,7 @@
         $sqlText = $_SESSION['sqlBrowseMeal'];
         $browsing = $_GET['b'];
 
-        if (empty($_SESSION['sqlBrowseMeal'])) {
+        if (empty($_SESSION['sqlBrowseMeal']) || !empty($MealPlan_Id)) {
           $sqlText = "SELECT * FROM `Project_Database`.`MEAL`;" ;
         }
 
