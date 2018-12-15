@@ -108,7 +108,7 @@
                 $style = 'background-color:rgba(0,0,0,0.6)';  //make included recipes stand out
               }
               echo "<tr onClick=\"toggleInMeal($Meal_Id, $id)\" style=\"$style\">
-                <td>$name</td>
+                <td colspan=\"2\">$name</td>
                 <td style=\"text-align:center;\">$prep Minutes</td>
                 <td style=\"text-align:center;\">$rating Stars</td>
                 <td>$instructions</td>

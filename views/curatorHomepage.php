@@ -158,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['channel'] = $channelName;
     }
   }
-  else if (!$hasChannel) {
+  else if (!$hasChannel && $potentialpass<>$actualpass) {
     $Errmessage = "Password Incorrect";
     echo "<script type='text/javascript'>alert('$Errmessage');</script>";
     $_SESSION['channel'] = "";
