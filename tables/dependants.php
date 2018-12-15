@@ -29,14 +29,14 @@
             $relationship = $row['Relationship'];
             $allergies = $row['No-of_allergies']; //check this
             echo "
-            <tr>
+            <tr onClick=\"location.href = '../edit/dependant.php?d=$name'\">
              <td style=\"width:50%;\">$name</td>
              <td style=\"width:30%;\">$relationship</td>
              <td style=\"width:20%;\">$allergies</td>
             </tr>";
           }
         } else {
-          echo "<tr><td>None</td><td></td></tr>";
+          echo "<tr><td colspan=\"100%\">None</td></tr>";
         }
       ?>
     </table>

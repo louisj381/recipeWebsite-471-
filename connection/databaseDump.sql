@@ -203,29 +203,6 @@ INSERT INTO `END_USER` (`User_Id`, `Email_Address`, `Screen_Name`, `Hashed_Passw
 UNLOCK TABLES;
 
 --
--- Table structure for table `EQUIPMENT`
---
-
-DROP TABLE IF EXISTS `EQUIPMENT`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `EQUIPMENT` (
-  `Name` varchar(25) NOT NULL,
-  `Type` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`Name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `EQUIPMENT`
---
-
-LOCK TABLES `EQUIPMENT` WRITE;
-/*!40000 ALTER TABLE `EQUIPMENT` DISABLE KEYS */;
-/*!40000 ALTER TABLE `EQUIPMENT` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `HOSTS`
 --
 
@@ -469,22 +446,6 @@ INSERT INTO `RECIPE_CONTAINS` (`Recipe_Id`, `Ingredient`, `Quantity`, `Unit`) VA
 /*!40000 ALTER TABLE `RECIPE_CONTAINS` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `RECIPE_REQUIRES_EQUIPT`
---
-
-DROP TABLE IF EXISTS `RECIPE_REQUIRES_EQUIPT`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `RECIPE_REQUIRES_EQUIPT` (
-  `RecipeId` int(10) NOT NULL AUTO_INCREMENT,
-  `EquipmentName` varchar(25) NOT NULL DEFAULT '',
-  PRIMARY KEY (`RecipeId`,`EquipmentName`),
-  KEY `Name_idx` (`EquipmentName`),
-  CONSTRAINT `Name` FOREIGN KEY (`EquipmentName`) REFERENCES `EQUIPMENT` (`Name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `RecipeIDEquip` FOREIGN KEY (`RecipeId`) REFERENCES `RECIPE` (`Recipe_Id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `RECIPE_REQUIRES_EQUIPT`

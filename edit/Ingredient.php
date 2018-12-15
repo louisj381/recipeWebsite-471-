@@ -15,34 +15,6 @@ include("../connection/dbConfig.php");
     echo 'updating referer' ;
     $back = $_SERVER['HTTP_REFERER'];
   }
-// <<<<<<< Louis  // i just commented out louis' side until i can see what he did + it would really mess with brackets
-//   $User_Id = $_SESSION['user_id'];
-//   $sql = "SELECT * FROM `Project_Database`.`USER_INGREDIENTS` WHERE `User_Id` = '$User_Id' AND `Ingredient` = '$ingrName';";
-//   $qur = $db->query($sql);
-//   if ($qur->num_rows > 0) {
-//     $row = $qur->fetch_assoc();
-//     $iQuantity = $row['count'];
-//     $iUnit = $row['unit'];
-//   }
-//   $valid_input = (!empty($_POST['iQuantity']) && !empty($_POST['iUnit']));
-
-//   if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['saveEdits'] && $valid_input) {
-//     $ingrName= $_POST['iName'];
-//     $iQuantity= $_POST['iQuantity'];
-//     $iUnit= text_input($_POST['iUnit']);
-
-//     $sql = "UPDATE `Project_Database`.`USER_INGREDIENTS`
-//             SET `count` = '$iQuantity',
-//                 `unit` = '$iUnit'
-//             WHERE `Ingredient` = '$ingrName' AND
-//             `User_Id` = '$User_Id'
-//           ;";
-//           echo $sql;
-//     $success = $db->query($sql);
-//     if ($success === TRUE) {
-//       $result = "Successful Saving Changes";
-// =======
-
   $sqlIng = "SELECT * FROM `Project_Database`.`INGREDIENT` WHERE `Name` = '$ingrName';";
   $res = $db->query($sqlIng);
   // echo $db->error;
@@ -96,7 +68,6 @@ $rId = $_GET['rId'];
     $res = $db->query($del);
     if ($res) {
       $result = "Successful Saving Changes: " . $resultSuffix;
-// >>>>>>> Keenan
     } else {
       $result = "Unsuccessful Saving Changes: " . $resultSuffix;
     }
@@ -160,15 +131,6 @@ $rId = $_GET['rId'];
     <td><?php echo "<p>$result</p>";?></td></tr>
   </table>
   <table style="width:100%">
-<!-- <<<<<<< Louis commented out-->
-<!--   <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?rId=$Recipe_Id";?> method="post" id="info">
-    <tr><td>Ingredient:</td><td style="text-align:right;"><?=$ingrName?></td></tr>
-    <tr><td>Quantity:</td><td><input type="number"  name="iQuantity" style="width:100%" value="<?echo $iQuantity?>"></td></tr>
-    <tr><td>Unit:</td><td><input type="text"  name="iUnit" style="width:100%" value="<?echo $iUnit?>"></td></tr>
-    <tr style="height:40%">
-  </form>
-  <form action="../tables/ingredients.php" method="post" id="back"></form> -->
-<!-- ======= -->
   <form action=<?php $r = ( $_GET['rId'] <> NULL )? "&rId=" . $rId : "";
                 echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?i=$ingrName" . $r;?> method="post" id="info">
     <tr><td>Ingredient Name:</td><td><input type="text" name="iName" style="width:100%" value="<?echo $ingrName?>" readonly></td></tr>
@@ -190,7 +152,6 @@ $rId = $_GET['rId'];
       echo '<form action="' . $url . '" method="post" id="back"></form>';
       //TODO that's a useful chunk of code (todo only for ease of access)
   ?>
-<!-- >>>>>>> Keenan -->
   <tr>
     <td style="float:right;"><button class="button" style="width:100%" type="submit" name="saveEdits" value="TRUE" form="info">Save</button></td>
     <td><button class="button" style="width:100%" type="submit" name="delete" value="TRUE" form="info">Delete</button></td>

@@ -15,7 +15,7 @@ include("../../connection/dbConfig.php");
   $res = $db->query($sql);
   $Recipe_Id = mysqli_num_rows($res);
   //echo $Recipe_Id;
-  $uID = $_SESSION['uID'];
+  $uID = $_SESSION['user_id'];
 
   $valid_input = (!empty($_POST['rName']) && !empty($_POST['rPrep']) && !empty($_POST['rCook']) && !empty($_POST['rInstr']));
   $rName = text_input($_POST['rName']);
@@ -28,7 +28,7 @@ include("../../connection/dbConfig.php");
     $rPrep = $_POST['rPrep'];
     $rCook = $_POST['rCook'];
     $rRate = $_POST['rRate'];
-    $uID = $_SESSION['uID'];
+    $uID = $_SESSION['user_id'];
 
     if (empty($_POST['rRate'])){
       $rRate = "NULL";
@@ -38,13 +38,14 @@ include("../../connection/dbConfig.php");
     $rInstr = $_POST['rInstr'];
     $Recipe_Id = ($Recipe_Id <> NULL)? $Recipe_Id : $_GET['rId'];
     // echo $Recipe_Id;
-
     $sql = "INSERT INTO `Project_Database`.`RECIPE`
                     (`Recipe_Id`,`Name`,`PrepTime`, `CookTime`, `Rating`, `Instructions`, `creator`)
             VALUES ('$Recipe_Id', '$rName', '$rPrep', '$rCook', '$rRate', '$rInstr', '$uID' )";
-    $success = $db->query($sql);
-    // echo $sql;
-    if ($success == TRUE) {
+    $success1 = $db->query($sql);
+    $sql = "INSERT INTO `Project_Database`.`USER_RECIPES` (`User_Id`,`Recipe_Id`) VALUES ('$uID', '$Recipe_Id');";
+    $success2 = $db->query($sql);
+     echo $sql;
+    if ($success1 == TRUE && $success2 == TRUE) {
       $result = "Successful Saving Changes: " . $db->error;
     } else {
       $result = "Unsuccessful Saving Changes: " . $db->error;
@@ -53,7 +54,7 @@ include("../../connection/dbConfig.php");
   }//end post
   else if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['addRecipe']) {
     $result = "Missing values!";
-    //echo "<script type='text/javascript'>alert('$result');</script>"; // <-this is annoying
+    echo "<script type='text/javascript'>alert('$result');</script>";
   } else {
     //just entered page
   }

@@ -17,7 +17,7 @@
 <div class="center" style="width:80%;">
   <h2> Guestbook: </h2>
   <body>
-    <iframe src="../tables/dependants.php" style="width:100%;"></iframe>
+    <iframe src="../tables/dependants.php" style="width:100%;height:70%"></iframe>
     <form action="../creationForms/data/addDependant.php" method="post" id="addDep"></form>
     <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="refresh"></form>
     <form action="<?php echo $homepage?>" method="post" id="back"></form>
