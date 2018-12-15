@@ -144,19 +144,24 @@ if (!$hasChannel) {
 
 <?php
 //logic for creating a channel
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $channelName = $_POST['channel'];
   $potentialpass = $_POST['psw'];
   $actualpass = $_SESSION['password'];
-  if ($potentialpass==$actualpass) {
+  if ($potentialpass==$actualpass  ) {
     $sql = "INSERT INTO `Project_Database`.`CHANNEL` (`Name`,`User_Id`) VALUES('$channelName', '$User_Id');";
     $res = mysqli_query($db, $sql);
     $success = "Channel Created";
-    echo "<script type='text/javascript'>alert('$success');</script>";
+    if ($_SESSION['channel'] != $channelName) {
+      echo "<script type='text/javascript'>alert('$success');window.top.location.href = window.top.location.href;</script>";
+      $_SESSION['channel'] = $channelName;
+    }
   }
   else if (!$hasChannel) {
     $Errmessage = "Password Incorrect";
     echo "<script type='text/javascript'>alert('$Errmessage');</script>";
+    $_SESSION['channel'] = "";
   }
 
 }
