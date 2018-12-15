@@ -20,7 +20,6 @@
      <form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post" id="refresh"></form>
      <form action="../views/standardHomepage.php" method="post" id="back"></form>
 
-     <button class="button" style="width:100%;" type="submit" name="Add" value="Add"form="mealPlan">Add</button>
      <button class="button" style="width:100%;" type="submit" name="Refresh" value="Refresh" form="refresh">Refresh</button>
      <button class="button" style="width:100%;" type="submit" name="back" value="Back to My Stuff" form="back">Back to My Stuff</button>
   </body>
